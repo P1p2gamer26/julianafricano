@@ -1,0 +1,32 @@
+---
+import { timeline } from '../data/timeline';
+---
+
+<section class="section section--alt" id="trayectoria">
+  <div class="container">
+    <span class="eyebrow reveal">Trayectoria</span>
+    <h2 class="section-title reveal">Mi camino en <span class="grad-text">ingenier&iacute;a</span> y c&oacute;digo</h2>
+    <p class="section-sub reveal">
+      De aprendiz autodidacta a construir y operar sistemas en producción para
+      organizaciones reales.
+    </p>
+
+    <div class="timeline">
+      {
+        timeline.map((t, idx) => (
+          <div class="timeline__item reveal" style={`transition-delay: ${idx * 70}ms`}>
+            <span class="timeline__period">{t.period}</span>
+            <h3>{t.title}</h3>
+            <div class="role">{t.role}</div>
+            <p>{t.desc}</p>
+            <div class="timeline__tags">
+              {t.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

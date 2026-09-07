@@ -1,0 +1,110 @@
+---
+import { projects } from '../data/projects';
+import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
+
+const filters = [
+  { id: 'all', label: 'Todos' },
+  { id: 'prod', label: 'Producción' },
+  { id: 'ai', label: 'IA' },
+  { id: 'iot', label: 'IoT' },
+  { id: 'academic', label: 'Académicos' },
+];
+
+const badgeClass: Record<string, string> = {
+  prod: 'badge--prod',
+  ai: 'badge--iot',
+  iot: 'badge--iot',
+  academic: 'badge--acad',
+};
+
+const badgeLabel: Record<string, string> = {
+  prod: 'Producción',
+  ai: 'IA',
+  iot: 'IoT',
+  academic: 'Académico',
+};
+---
+
+<section class="section" id="proyectos">
+  <div class="container">
+    <span class="eyebrow reveal">Proyectos</span>
+    <h2 class="section-title reveal">Trabajo que ya está <span class="grad-text">rodando</span></h2>
+    <p class="section-sub reveal">
+      Sistemas en producción, incursiones en IA e IoT y proyectos académicos. Cada
+      pieza con su historia y su código.
+    </p>
+
+    <div class="projects__filter reveal" role="group" aria-label="Filtrar proyectos">
+      {filters.map((f) => (
+        <button
+          class={`filter-btn${f.id === 'all' ? ' is-active' : ''}`}
+          data-filter={f.id}
+        >
+          {f.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="projects__grid" id="projectsGrid">
+      {
+        projects.map((p, idx) => (
+          <article
+            class={`project-card${p.featured ? ' project-card--feature' : ''}`}
+            data-category={p.category}
+            style={`transition-delay: ${(idx % 3) * 70}ms`}
+          >
+            <div class="project-card__top">
+              <span class="project-card__icon" aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span>
+              <span class={`badge ${badgeClass[p.category]}`}>{badgeLabel[p.category]}</span>
+            </div>
+
+            <h3>{p.name}</h3>
+            <p class="mono" style="font-size:.8rem;color:var(--muted-2);margin-bottom:8px">{p.tagline}</p>
+            <p class="project-card__desc">{p.desc}</p>
+
+            <div class="project-card__links">
+              {p.repo && (
+                <a href={p.repo} target="_blank" rel="noopener" aria-label={`Código en GitHub: ${p.name}`}>
+                  <span set:html={GITHUB_ICON} /> Repo
+                </a>
+              )}
+              {p.url && (
+                <a href={p.url} target="_blank" rel="noopener">
+                  <span set:html={EXTERNAL_ICON} /> Sitio
+                </a>
+              )}
+            </div>
+
+            <div class="skill-group__tags" style="margin-top:16px">
+              {p.tech.slice(0, 5).map((t) => (
+                <span class="tag">{t}</span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.project-card');
+
+  btns.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      btns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const filter = btn.dataset.filter;
+
+      cards.forEach((card) => {
+        const cat = card.dataset.category;
+        const show = filter === 'all' || cat === filter;
+        card.style.display = show ? '' : 'none';
+        if (show) {
+          requestAnimationFrame(() => card.classList.add('is-visible'));
+        }
+      });
+    })
+  );
+</script>

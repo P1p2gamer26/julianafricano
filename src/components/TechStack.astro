@@ -1,0 +1,33 @@
+---
+import { skillGroups } from '../data/skills';
+import { SITE_ICONS, ICONS } from '../icons';
+---
+
+<section class="section section--alt" id="stack">
+  <div class="container">
+    <span class="eyebrow reveal">Stack</span>
+    <h2 class="section-title reveal">Tecnologías con las que <span class="grad-text">construyo</span></h2>
+    <p class="section-sub reveal">
+      Desde el hardware que mide el mundo físico hasta las APIs y las bases de datos
+      que lo procesan. Stack orientado a resolver problemas de punta a punta.
+    </p>
+
+    <div class="skills__grid">
+      {
+        skillGroups.map((group, gi) => (
+          <div class="skill-group reveal" style={`transition-delay: ${gi * 60}ms`}>
+            <div class="skill-group__head">
+              <span class="skill-group__icon" aria-hidden="true" set:html={ICONS[group.icon]}></span>
+              <h3>{group.title}</h3>
+            </div>
+            <div class="skill-group__tags">
+              {group.items.map((it) => (
+                <span class={`tag${it.top ? ' tag--top' : ''}`}>{it.name}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

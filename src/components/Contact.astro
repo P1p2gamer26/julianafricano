@@ -1,0 +1,47 @@
+---
+import { site } from '../data/site';
+import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON, MAIL_ICON } from '../icons';
+
+const socials = [
+  { name: 'GitHub', handle: '@JAfricanoT', href: site.github, icon: GITHUB_ICON },
+  { name: 'LinkedIn', handle: 'jafricanot', href: site.linkedin, icon: LINKEDIN_ICON },
+  { name: 'Instagram', handle: '@jafricanot', href: site.instagram, icon: INSTAGRAM_ICON },
+  { name: 'Email', handle: site.email, href: `mailto:${site.email}`, icon: MAIL_ICON },
+];
+---
+
+<section class="section contact" id="contacto">
+  <div class="container">
+    <div class="contact__card reveal">
+      <span class="eyebrow" style="justify-content:center">Contacto</span>
+      <h2 class="contact__title">
+        ¿Tienes un proyecto <span class="grad-text">en mente</span>?
+      </h2>
+      <p class="contact__text">
+        Ya sea una plataforma full-stack, un sistema con IA, hardware conectado o
+        darle un empujón a tu idea: hablemos.
+      </p>
+
+      <div class="contact__cta">
+        <a class="btn btn--primary" href={`mailto:${site.email}`}>
+          <span set:html={MAIL_ICON} />
+          {site.email}
+        </a>
+        <a class="btn" href={site.linkedin} target="_blank" rel="noopener">
+          <span set:html={LINKEDIN_ICON} />
+          Conectar en LinkedIn
+        </a>
+      </div>
+
+      <div class="contact__socials">
+        {socials.map((s) => (
+          <a class="social" href={s.href} target={s.icon === MAIL_ICON ? undefined : '_blank'} rel="noopener">
+            <span set:html={s.icon} />
+            <strong>{s.name}</strong>
+            <span class="mono">{s.handle}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

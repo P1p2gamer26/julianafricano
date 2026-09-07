@@ -1,0 +1,119 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const metaTitle = title ? `${title} — ${site.alias}` : `${site.name} — ${site.role}`;
+const metaDesc =
+  description ??
+  'Portafolio profesional de Julian Felipe Africano Preciado: desarrollador Full-Stack con foco en Inteligencia Artificial, IoT y sistemas en producción. Bogotá, Colombia.';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDesc} />
+    <meta name="theme-color" content="#0a0c10" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDesc} />
+    <meta property="og:site_name" content={site.alias} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDesc} />
+
+    <link rel="icon" type="image/svg+xml" href={`${site.base}/favicon.svg`} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <div class="nav__inner">
+        <a class="nav__logo" href="#inicio" aria-label="Inicio">
+          <span class="nav__logo-mark">JA</span>
+          <span>{site.alias}</span>
+        </a>
+
+        <ul class="nav__links" id="navLinks">
+          <li><a class="nav__link" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#sobre-mi">Sobre mí</a></li>
+          <li><a class="nav__link" href="#stack">Stack</a></li>
+          <li><a class="nav__link" href="#proyectos">Proyectos</a></li>
+          <li><a class="nav__link" href="#trayectoria">Trayectoria</a></li>
+          <li>
+            <a class="btn btn--primary btn--sm nav__cta" href="#contacto">Contáctame</a>
+          </li>
+        </ul>
+
+        <button class="nav__burger" id="burger" aria-label="Abrir menú">
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span>© {new Date().getFullYear()} Julian Felipe Africano Preciado.</span>
+        <span>
+          Hecho con <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> ·
+          <a href={site.github} target="_blank" rel="noopener">GitHub</a> ·
+          <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const nav = document.getElementById('nav');
+      const burger = document.getElementById('burger');
+      const links = document.getElementById('navLinks');
+
+      const onScroll = () => {
+        nav.classList.toggle('is-scrolled', window.scrollY > 20);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      burger.addEventListener('click', () => {
+        const open = links.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', String(open));
+      });
+
+      links.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => links.classList.remove('is-open'))
+      );
+
+      /* Scroll-reveal */
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.reveal, .project-card').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
