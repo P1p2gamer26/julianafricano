@@ -12,27 +12,62 @@ const { title, description } = Astro.props;
 const metaTitle = title ? `${title} — ${site.alias}` : `${site.name} — ${site.role}`;
 const metaDesc =
   description ??
-  'Portafolio profesional de Julian Felipe Africano Preciado: Ingeniero de Sistemas, desarrollador Full-Stack e IA. Sistemas en producción y una startup de visión por computadora. Bogotá, Colombia.';
+  'Portafolio profesional de Julian Felipe Africano Preciado: Ingeniero de Sistemas, desarrollador Full-Stack e IA. Plataformas en producción como SysteFarma. Bogotá, Colombia.';
+
+const baseUrl = `${site.host}${site.base}`;
+const rawPath = Astro.url.pathname.replace(/\/+$/, '').replace(/(^|\/)index\.html?$/, '$1') || '';
+const canonical = `${site.host}${rawPath}/`;
+const ogImage = `${baseUrl}/og.png`;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  alternateName: site.alias,
+  jobTitle: site.role,
+  url: baseUrl,
+  email: `mailto:${site.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Bogotá', addressCountry: 'CO' },
+  knowsAbout: [
+    'Ingeniería de Software',
+    'Desarrollo Full-Stack',
+    'Inteligencia Artificial',
+    'Visión por Computadora',
+    'DevOps',
+  ],
+  sameAs: [site.github, site.linkedin, site.instagram],
+};
 ---
 
 <!doctype html>
-<html lang="es" data-theme="morado">
+<html lang="es-CO" data-theme="oscuro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{metaTitle}</title>
     <meta name="description" content={metaDesc} />
-    <meta name="theme-color" content="#0b0a12" />
+    <meta name="theme-color" content="#0a0c10" />
+    <meta name="author" content={site.name} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={metaTitle} />
     <meta property="og:description" content={metaDesc} />
     <meta property="og:site_name" content={site.alias} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={metaTitle} />
+    <meta property="og:locale" content="es_CO" />
+
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={metaTitle} />
     <meta name="twitter:description" content={metaDesc} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" type="image/svg+xml" href={`${site.base}/favicon.svg`} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -128,8 +163,8 @@ const metaDesc =
       if (saved && THEMES.includes(saved)) {
         root.dataset.theme = saved;
       } else {
-        root.dataset.theme = 'morado';
-        localStorage.setItem('theme', 'morado');
+        root.dataset.theme = 'oscuro';
+        localStorage.setItem('theme', 'oscuro');
       }
 
       const paintTheme = () => {
@@ -140,7 +175,7 @@ const metaDesc =
             claro: '#f7f6fb',
             oscuro: '#0a0c10',
           };
-          meta.setAttribute('content', colors[root.dataset.theme as string] || colors.morado);
+          meta.setAttribute('content', colors[root.dataset.theme as string] || colors.oscuro);
         }
         document.querySelectorAll<HTMLElement>('[data-theme-sel]').forEach((b) => {
           b.classList.toggle('is-active', b.dataset.themeSel === root.dataset.theme);

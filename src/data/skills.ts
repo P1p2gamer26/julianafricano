@@ -1,6 +1,6 @@
 export type SkillGroup = {
   title: string;
-  icon: 'code' | 'server' | 'brain' | 'chip' | 'db' | 'tools';
+  icon: 'code' | 'server' | 'brain' | 'chip' | 'db' | 'tools' | 'ai';
   items: { name: string; top?: boolean }[];
 };
 
@@ -42,6 +42,20 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Machine Learning' },
       { name: 'NumPy / Pandas' },
       { name: 'LLMs (Anthropic)' },
+    ],
+  },
+  {
+    title: 'Herramientas de IA',
+    icon: 'ai',
+    items: [
+      { name: 'ChatGPT', top: true },
+      { name: 'Claude' },
+      { name: 'GitHub Copilot' },
+      { name: 'Cursor' },
+      { name: 'Hugging Face' },
+      { name: 'LangChain' },
+      { name: 'PyTorch' },
+      { name: 'Whisper' },
     ],
   },
   {

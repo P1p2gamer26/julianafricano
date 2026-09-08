@@ -4,8 +4,8 @@ import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON, MAIL_ICON } from '../icons'
 
 const socials = [
   { name: 'GitHub', handle: '@P1p2gamer26', href: site.github, icon: GITHUB_ICON },
-  { name: 'LinkedIn', handle: 'jafricanot', href: site.linkedin, icon: LINKEDIN_ICON },
-  { name: 'Instagram', handle: '@jafricanot', href: site.instagram, icon: INSTAGRAM_ICON },
+  { name: 'LinkedIn', handle: 'Julian Felipe Africano', href: site.linkedin, icon: LINKEDIN_ICON },
+  { name: 'Instagram', handle: '@julianafricano', href: site.instagram, icon: INSTAGRAM_ICON },
   { name: 'Email', handle: site.email, href: `mailto:${site.email}`, icon: MAIL_ICON },
 ];
 ---
@@ -22,8 +22,32 @@ const socials = [
         idea que necesita un ingeniero? Hablemos.
       </p>
 
+      <form class="contact__form" id="contactForm" data-endpoint={site.formEndpoint} novalidate>
+        <div class="contact__fields">
+          <label class="field">
+            <span class="field__label">Nombre</span>
+            <input type="text" name="name" placeholder="Tu nombre" required autocomplete="name" />
+          </label>
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+          </label>
+        </div>
+        <label class="field">
+          <span class="field__label">Mensaje</span>
+          <textarea name="message" rows="4" placeholder="Cuéntame sobre tu proyecto…" required></textarea>
+        </label>
+        <button class="btn btn--primary" type="submit">Enviar mensaje</button>
+        <p class="contact__form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
+      </form>
+
+      <div class="contact__divider" role="presentation"><span>o escríbeme directo</span></div>
+
       <div class="contact__cta">
-        <a class="btn btn--primary" href={`mailto:${site.email}`}>
+        <a class="btn btn--primary" href={`${site.base}/CV-Julian-Africano.pdf`} download>
+          Descargar CV
+        </a>
+        <a class="btn" href={`mailto:${site.email}`}>
           <span set:html={MAIL_ICON} />
           {site.email}
         </a>
@@ -45,3 +69,45 @@ const socials = [
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const status = document.getElementById('formStatus') as HTMLElement;
+  const endpoint = form.dataset.endpoint as string;
+  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  const setStatus = (msg: string, ok: boolean) => {
+    status.textContent = msg;
+    status.hidden = false;
+    status.className = ok ? 'contact__form-status is-ok' : 'contact__form-status is-error';
+  };
+
+  form.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      setStatus('Por favor completa todos los campos correctamente.', false);
+      return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+    setStatus('', true);
+    status.hidden = true;
+
+    const data = new FormData(form);
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        setStatus('¡Mensaje enviado! Te responderé pronto.', true);
+        form.reset();
+      } else {
+        const body = await res.json().catch(() => ({}));
+        setStatus((body as { errors?: { message?: string }[] }).errors?.[0]?.message ?? 'No se pudo enviar. Inténtalo de nuevo.', false);
+      }
+    } catch {
+      setStatus('Error de conexión. Inténtalo de nuevo o escríbeme por email.', false);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar mensaje';
+    }
+  });
+</script>

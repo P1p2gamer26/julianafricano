@@ -7,19 +7,16 @@ const filters = [
   { id: 'all', label: 'Todos' },
   { id: 'prod', label: 'Producción' },
   { id: 'ai', label: 'IA & Visión' },
-  { id: 'academic', label: 'Académicos' },
 ];
 
 const badgeClass: Record<string, string> = {
   prod: 'badge--prod',
   ai: 'badge--ai',
-  academic: 'badge--acad',
 };
 
 const badgeLabel: Record<string, string> = {
   prod: 'Producción',
   ai: 'IA & Visión',
-  academic: 'Académico',
 };
 ---
 
@@ -69,7 +66,7 @@ const badgeLabel: Record<string, string> = {
                       data-caption={`${p.name} — captura ${gi + 1}`}
                       aria-label={`Ver captura ${gi + 1} de ${p.name}`}
                     >
-                      <img src={img(g)} alt={`Captura ${gi + 1} de ${p.name}`} loading="lazy" />
+                      <img src={img(g)} alt={`Captura ${gi + 1} del proyecto ${p.name}`} loading="lazy" width="400" height="300" />
                       <span class="gallery__more">+{Math.max(p.gallery.length - 4, 0)}</span>
                     </button>
                   ))}
@@ -101,16 +98,16 @@ const badgeLabel: Record<string, string> = {
     </div>
   </div>
 
-  <div class="lightbox" id="lightbox" hidden>
-    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar">
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Visor de capturas">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar visor">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
-    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Anterior">‹</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Captura anterior">‹</button>
     <figure class="lightbox__figure">
       <img id="lightboxImg" alt="" />
       <figcaption id="lightboxCaption"></figcaption>
     </figure>
-    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Siguiente">›</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Captura siguiente">›</button>
   </div>
 </section>
 
@@ -156,21 +153,31 @@ const badgeLabel: Record<string, string> = {
   let items: string[] = [];
   let caps: string[] = [];
   let current = 0;
+  let lastFocused: HTMLElement | null = null;
+  const lbFocusables = () =>
+    [document.getElementById('lightboxClose'), document.getElementById('lightboxPrev'), document.getElementById('lightboxNext')].filter(
+      (el): el is HTMLElement => !!el
+    );
 
   const open = (i: number) => {
     current = i;
+    lastFocused = document.activeElement as HTMLElement | null;
     lbImg.src = items[i];
+    lbImg.alt = caps[i];
     lbCap.textContent = caps[i];
     lb.hidden = false;
     document.body.style.overflow = 'hidden';
+    (document.getElementById('lightboxClose') as HTMLElement)?.focus();
   };
   const close = () => {
     lb.hidden = true;
     document.body.style.overflow = '';
+    lastFocused?.focus();
   };
   const step = (d: number) => {
     current = (current + d + items.length) % items.length;
     lbImg.src = items[current];
+    lbImg.alt = caps[current];
     lbCap.textContent = caps[current];
   };
 
@@ -196,5 +203,17 @@ const badgeLabel: Record<string, string> = {
     if (e.key === 'Escape') close();
     if (e.key === 'ArrowLeft') step(-1);
     if (e.key === 'ArrowRight') step(1);
+    if (e.key === 'Tab') {
+      const els = lbFocusables();
+      const first = els[0];
+      const last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 </script>

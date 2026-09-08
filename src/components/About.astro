@@ -7,17 +7,18 @@ import { site } from '../data/site';
     <span class="eyebrow reveal">Sobre mí</span>
     <h2 class="section-title reveal">Ingeniero de Sistemas con <span class="grad-text">productos en producción</span></h2>
     <p class="section-sub reveal">
-      Estudiante de ingeniería en la Javeriana, CEO de LIDA UJAP y fundador de una
-      startup de visión por computadora.
+      Estudiante de ingeniería en la Javeriana con plataformas desplegadas
+      en producción.
     </p>
 
     <div class="about__grid">
       <div class="about__text reveal">
         <div class="highlight-box">
           <p>
-            He desplegado <strong>dos plataformas web en producción</strong> —SysteFarma y
-            Asistencia GABO— y ahora construyo una startup de analítica por
-            cámaras para tiendas (<strong>vision-analytics</strong>).
+            He desplegado plataformas web en producción como
+            <strong>SysteFarma</strong>, la plataforma de gestión sanitaria para
+            droguerías colombianas, y <strong>Asistencia GABO</strong>, un sistema
+            de asistencia escolar para 1.200 estudiantes.
           </p>
         </div>
 
@@ -43,48 +44,5 @@ import { site } from '../data/site';
       </ul>
     </div>
 
-    <div class="stats">
-      <div class="stat reveal">
-        <div class="stat__num grad-text" data-count="3" data-suffix="">+0</div>
-        <div class="stat__label">Plataformas desplegadas en entornos reales</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat__num grad-text" data-count="8" data-suffix="+">0+</div>
-        <div class="stat__label">Proyectos construidos y versionados en GitHub</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat__num grad-text" data-count="620" data-suffix="k">0k</div>
-        <div class="stat__label">Registros por semestre que escala Asistencia GABO</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat__num grad-text" data-count="12" data-suffix="+">0+</div>
-        <div class="stat__label">Personas detectadas por frame en las demos</div>
-      </div>
-    </div>
   </div>
 </section>
-
-<script>
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) {
-        if (!e.isIntersecting) continue;
-        const el = e.target as HTMLElement;
-        const target = Number(el.dataset.count || 0);
-        const suffix = el.dataset.suffix || '';
-        const dur = 900;
-        const t0 = performance.now();
-        const tick = (now: number) => {
-          const p = Math.min((now - t0) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(eased * target) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-        io.unobserve(el);
-      }
-    },
-    { threshold: 0.5 }
-  );
-  document.querySelectorAll('.stat__num[data-count]').forEach((el) => io.observe(el));
-</script>

@@ -3,7 +3,7 @@ export type Project = {
   tagline: string;
   desc: string;
   badges: string[];
-  category: 'prod' | 'ai' | 'academic';
+  category: 'prod' | 'ai';
   repo?: string;
   url?: string;
   tech: string[];
@@ -12,23 +12,6 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  {
-    name: 'vision-analytics',
-    tagline: 'Startup de visión por computadora para tiendas físicas',
-    desc: 'Analítica con cámaras y video para retail: aforo, filas, zonas y cobertura de personal en tiempo real. Detección con YOLOv8 sobre cámaras RTSP (o video), panel web con métricas y recomendaciones diarias generadas por un LLM. Privacidad por diseño: procesa en local, sin guardar video.',
-    badges: ['STARTUP', 'IA & VISIÓN', 'PRODUCCIÓN'],
-    category: 'ai',
-    repo: 'https://github.com/P1p2gamer26/vision-analytics',
-    tech: ['YOLOv8', 'OpenCV', 'RTSP', 'supervision', 'LLM (Anthropic)', 'Django', 'React', 'PostgreSQL', 'Docker'],
-    featured: true,
-    gallery: [
-      '/proyectos/camaras/super_caja-1.jpg',
-      '/proyectos/camaras/tienda_iprox-1.jpg',
-      '/proyectos/camaras/tienda_usa-1.jpg',
-      '/proyectos/camaras/super_caja-2.jpg',
-      '/proyectos/camaras/tienda_iprox-3.jpg',
-    ],
-  },
   {
     name: 'SysteFarma',
     tagline: 'Plataforma en producción para droguerías colombianas',
@@ -39,11 +22,6 @@ export const projects: Project[] = [
     repo: 'https://github.com/P1p2gamer26/Drogueria_try',
     tech: ['Python', 'Django 5', 'DRF', 'PostgreSQL', 'JWT', 'PWA', 'Nginx', 'Cloudflare'],
     featured: true,
-    gallery: [
-      '/proyectos/systefarma/systefarma-home.png',
-      '/proyectos/systefarma/evidencia-sgc.jpg',
-      '/proyectos/systefarma/acciones-sociales.jpg',
-    ],
   },
   {
     name: 'Asistencia GABO',
@@ -62,6 +40,31 @@ export const projects: Project[] = [
     ],
   },
   {
+    name: 'Vision Analytics',
+    tagline: 'Proyecto de IA y visión por computadora para retail',
+    desc: 'Analítica con cámaras y video para retail: aforo, filas, zonas y cobertura de personal en tiempo real. Detección con YOLOv8 sobre cámaras RTSP (o video), panel web con métricas y recomendaciones generadas por un LLM. Procesamiento local.',
+    badges: ['IA & VISIÓN'],
+    category: 'ai',
+    repo: 'https://github.com/P1p2gamer26/vision-analytics',
+    tech: ['YOLOv8', 'OpenCV', 'RTSP', 'supervision', 'LLM (Anthropic)', 'Django', 'React', 'PostgreSQL', 'Docker'],
+    gallery: [
+      '/proyectos/camaras/super_caja-1.jpg',
+      '/proyectos/camaras/tienda_iprox-1.jpg',
+      '/proyectos/camaras/tienda_usa-1.jpg',
+      '/proyectos/camaras/super_caja-2.jpg',
+      '/proyectos/camaras/tienda_iprox-3.jpg',
+    ],
+  },
+  {
+    name: 'DataJam · 2º puesto',
+    tagline: 'Innovación pública con datos abiertos de Bogotá',
+    desc: 'Segundo puesto en el DataJam: diagnóstico con datos públicos del Portal de Datos Abiertos de Bogotá y propuesta de valor para la ciudad. Competencia de la Secretaría General de la Alcaldía de Bogotá con IDECA y la Pontificia Universidad Javeriana.',
+    badges: ['2º PUESTO', 'DATOS', 'IA'],
+    category: 'ai',
+    tech: ['Python', 'Pandas', 'Visualización', 'Datos Abiertos'],
+    featured: true,
+  },
+  {
     name: 'Sistema POS / Inventario',
     tagline: 'Punto de venta y trazabilidad de inventario',
     desc: 'POS con inventario por lotes, fechas de vencimiento, códigos de barras y cierre de caja. Pensado para el manejo de medicamentos y la trazabilidad sanitaria.',
@@ -69,41 +72,5 @@ export const projects: Project[] = [
     category: 'prod',
     repo: 'https://github.com/P1p2gamer26/SistemaPos',
     tech: ['Python', 'Django', 'JS', 'POS', 'Inventario'],
-  },
-  {
-    name: 'CICD',
-    tagline: 'Pipeline de integración y despliegue continuo',
-    desc: 'CI/CD completo: build, pruebas automatizadas y despliegue con notificación de estado del pipeline.',
-    badges: ['DEVOPS'],
-    category: 'academic',
-    repo: 'https://github.com/P1p2gamer26/CICD',
-    tech: ['CI/CD', 'Git', 'Docker', 'GitHub Actions'],
-  },
-  {
-    name: 'ProyectoIA3 · ProyectoIA4',
-    tagline: 'Machine Learning supervisado y no supervisado',
-    desc: 'Modelos de clasificación y regresión con scikit-learn sobre datasets reales.',
-    badges: ['ML', 'PYTHON'],
-    category: 'ai',
-    repo: 'https://github.com/P1p2gamer26/ProyectoIA3',
-    tech: ['Python', 'scikit-learn', 'NumPy', 'Pandas', 'Matplotlib'],
-  },
-  {
-    name: 'TicTacToeIA',
-    tagline: 'Tres en línea contra una máquina',
-    desc: 'Juego implementado en Java con estrategias minimax y heurísticas para la IA.',
-    badges: ['IA', 'JAVA'],
-    category: 'ai',
-    repo: 'https://github.com/P1p2gamer26/TicTacToeIA',
-    tech: ['Java', 'Minimax', 'Algoritmos'],
-  },
-  {
-    name: 'Zoo fantástico · Hotel Macondo',
-    tagline: 'Proyectos académicos web',
-    desc: 'Catálogo educativo y sistema de hotel con HTML/CSS/JS y persistencia en localStorage.',
-    badges: ['WEB', 'CRUD'],
-    category: 'academic',
-    repo: 'https://github.com/P1p2gamer26',
-    tech: ['HTML', 'CSS', 'JavaScript', 'localStorage'],
   },
 ];

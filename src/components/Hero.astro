@@ -24,13 +24,14 @@ import { site } from '../data/site';
       </h1>
 
       <p class="hero__lead">
-        Construyo productos de punta a punta y hoy lidero una
-        <strong>startup de visión por computadora</strong> para tiendas físicas.
-        De la idea al deploy en producción.
+        Construyo productos de punta a punta y he desplegado
+        <strong>plataformas en producción</strong> como SysteFarma, usada por
+        droguerías colombianas. De la idea al deploy en producción.
       </p>
 
       <div class="hero__cta">
         <a class="btn btn--primary" href="#proyectos">Ver proyectos</a>
+        <a class="btn" href={`${site.base}/CV-Julian-Africano.pdf`} download>Descargar CV</a>
         <a class="btn" href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href={`mailto:${site.email}`}>Escribirme</a>
       </div>
@@ -52,27 +53,15 @@ import { site } from '../data/site';
     </div>
 
     <div class="hero__card">
-      <div class="terminal">
-        <div class="terminal__bar">
-          <span class="terminal__dot terminal__dot--r"></span>
-          <span class="terminal__dot terminal__dot--y"></span>
-          <span class="terminal__dot terminal__dot--g"></span>
-          <span class="terminal__title">julian-africano — zsh</span>
-        </div>
-        <div class="terminal__body">
-          <div class="tline"><span class="ln">01</span><span class="kw">const</span> perfil = &#123;</div>
-          <div class="tline"><span class="ln">02</span>&nbsp;&nbsp;<span class="fn">nombre</span>: <span class="st">'Ingeniero de Sistemas'</span>,</div>
-          <div class="tline"><span class="ln">03</span>&nbsp;&nbsp;<span class="fn">stack</span>: [<span class="st">'Full-Stack'</span>, <span class="st">'IA'</span>, <span class="st">'Visión'</span>],</div>
-          <div class="tline"><span class="ln">04</span>&nbsp;&nbsp;<span class="fn">tecnologias</span>:</div>
-          <div class="tline"><span class="ln">05</span>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="st">'Python'</span>, <span class="st">'Django'</span>, <span class="st">'React'</span>,</div>
-          <div class="tline"><span class="ln">06</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">'Spring Boot'</span>, <span class="st">'YOLOv8'</span>],</div>
-          <div class="tline"><span class="ln">07</span>&nbsp;&nbsp;<span class="fn">proyectos</span>: [</div>
-          <div class="tline"><span class="ln">08</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">'vision-analytics'</span>, <span class="st">'SysteFarma'</span>,</div>
-          <div class="tline"><span class="ln">09</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">'Asistencia GABO'</span>, ...],</div>
-          <div class="tline"><span class="ln">10</span>&nbsp;&nbsp;<span class="fn">objetivo</span>: <span class="st">'aportar valor real'</span><span class="cursor"></span></div>
-          <div class="tline"><span class="ln">11</span>&#125;;</div>
-          <div class="tline"><span class="ln">12</span><span class="cm"># build en curso…</span> <span class="ok">✓ listo</span></div>
-        </div>
+      <div class="hero__photo">
+        <img
+          src={`${site.base}/perfil.jpg`}
+          alt="Retrato de Julian Felipe Africano Preciado"
+          width="800"
+          height="800"
+          loading="eager"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </div>

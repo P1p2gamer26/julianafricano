@@ -1,5 +1,5 @@
 /* ============================================================
-   Juliano Africano — Global Styles
+   Julian Africano — Global Styles
    3 temas: morado (default), claro y oscuro
    ============================================================ */
 
@@ -698,6 +698,25 @@ h4 {
 
 .hero__card {
   position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.hero__photo {
+  width: min(360px, 100%);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(var(--accent-rgb), 0.35);
+  box-shadow: var(--shadow-card), 0 32px 64px -24px rgba(var(--accent-rgb), 0.4);
+  animation: floaty 9s ease-in-out infinite alternate;
+}
+
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .terminal {
@@ -902,6 +921,19 @@ h4 {
   grid-template-columns: 1fr 1fr;
   gap: 56px;
   margin-top: 40px;
+}
+
+.about__photo {
+  margin-bottom: 24px;
+}
+
+.about__photo img {
+  width: min(260px, 100%);
+  border-radius: var(--radius);
+  border: 1px solid var(--badge-border);
+  box-shadow: var(--shadow-card), 0 24px 48px -24px rgba(var(--accent-rgb), 0.45);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .about__text p {
@@ -1591,6 +1623,97 @@ h4 {
 
 .social:hover svg {
   transform: translateY(-1px);
+}
+
+/* ---------- Contact form ---------- */
+.contact__form {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: left;
+  display: grid;
+  gap: 16px;
+}
+
+.contact__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background: var(--soft-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
+}
+
+.contact__form .btn {
+  justify-self: start;
+}
+
+.contact__form-status {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: -4px;
+}
+
+.contact__form-status.is-ok {
+  color: var(--accent-strong);
+}
+
+.contact__form-status.is-error {
+  color: var(--danger);
+}
+
+.contact__divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted-2);
+  font-size: 0.82rem;
+  margin: 34px 0 30px;
+}
+
+.contact__divider::before,
+.contact__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+@media (max-width: 520px) {
+  .contact__fields {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Footer ---------- */
