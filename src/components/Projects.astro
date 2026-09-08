@@ -2,22 +2,6 @@
 import { projects } from '../data/projects';
 import { img } from '../data/site';
 import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
-
-const filters = [
-  { id: 'all', label: 'Todos' },
-  { id: 'prod', label: 'Producción' },
-  { id: 'ai', label: 'IA & Visión' },
-];
-
-const badgeClass: Record<string, string> = {
-  prod: 'badge--prod',
-  ai: 'badge--ai',
-};
-
-const badgeLabel: Record<string, string> = {
-  prod: 'Producción',
-  ai: 'IA & Visión',
-};
 ---
 
 <section class="section section--alt" id="proyectos">
@@ -28,28 +12,16 @@ const badgeLabel: Record<string, string> = {
       Productos en producción y misiones de IA aplicada. Capturas reales, no mockups.
     </p>
 
-    <div class="projects__filter reveal" role="group" aria-label="Filtrar proyectos">
-      {filters.map((f) => (
-        <button
-          class={`filter-btn${f.id === 'all' ? ' is-active' : ''}`}
-          data-filter={f.id}
-        >
-          {f.label}
-        </button>
-      ))}
-    </div>
-
     <div class="projects__grid" id="projectsGrid">
       {
         projects.map((p, idx) => (
           <article
-            class={`project-card${p.featured ? ' project-card--feature' : ''}`}
-            data-category={p.category}
+            class="project-card"
             style={`transition-delay: ${(idx % 3) * 70}ms`}
           >
             <div class="project-card__top">
               <span class="project-card__icon" aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span>
-              <span class={`badge ${badgeClass[p.category]}`}>{badgeLabel[p.category]}</span>
+              <span class="badge badge--prod">{p.category === 'ai' ? 'IA & Visión' : 'Producción'}</span>
             </div>
 
             <h3>{p.name}</h3>
@@ -87,7 +59,7 @@ const badgeLabel: Record<string, string> = {
               )}
             </div>
 
-            <div class="skill-group__tags" style="margin-top:16px">
+            <div class="skill-group__tags" style="margin-top:auto;padding-top:16px">
               {p.tech.slice(0, 5).map((t) => (
                 <span class="tag">{t}</span>
               ))}
@@ -112,25 +84,7 @@ const badgeLabel: Record<string, string> = {
 </section>
 
 <script>
-  const btns = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.project-card');
-
-  btns.forEach((btn) =>
-    btn.addEventListener('click', () => {
-      btns.forEach((b) => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const filter = btn.dataset.filter;
-
-      cards.forEach((card) => {
-        const cat = card.dataset.category;
-        const show = filter === 'all' || cat === filter;
-        card.style.display = show ? '' : 'none';
-        if (show) {
-          requestAnimationFrame(() => card.classList.add('is-visible'));
-        }
-      });
-    })
-  );
 
   /* Tilt suave en las tarjetas */
   cards.forEach((card) => {

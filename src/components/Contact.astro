@@ -1,12 +1,11 @@
 ---
 import { site } from '../data/site';
-import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON, MAIL_ICON } from '../icons';
+import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON } from '../icons';
 
 const socials = [
   { name: 'GitHub', handle: '@P1p2gamer26', href: site.github, icon: GITHUB_ICON },
   { name: 'LinkedIn', handle: 'Julian Felipe Africano', href: site.linkedin, icon: LINKEDIN_ICON },
   { name: 'Instagram', handle: '@julianafricano', href: site.instagram, icon: INSTAGRAM_ICON },
-  { name: 'Email', handle: site.email, href: `mailto:${site.email}`, icon: MAIL_ICON },
 ];
 ---
 
@@ -47,10 +46,6 @@ const socials = [
         <a class="btn btn--primary" href={`${site.base}/CV-Julian-Africano.pdf`} download>
           Descargar CV
         </a>
-        <a class="btn" href={`mailto:${site.email}`}>
-          <span set:html={MAIL_ICON} />
-          {site.email}
-        </a>
         <a class="btn" href={site.linkedin} target="_blank" rel="noopener">
           <span set:html={LINKEDIN_ICON} />
           Conectar en LinkedIn
@@ -59,7 +54,7 @@ const socials = [
 
       <div class="contact__socials">
         {socials.map((s) => (
-          <a class="social" href={s.href} target={s.icon === MAIL_ICON ? undefined : '_blank'} rel="noopener">
+          <a class="social" href={s.href} target="_blank" rel="noopener">
             <span set:html={s.icon} />
             <strong>{s.name}</strong>
             <span class="mono">{s.handle}</span>
@@ -104,7 +99,7 @@ const socials = [
         setStatus((body as { errors?: { message?: string }[] }).errors?.[0]?.message ?? 'No se pudo enviar. Inténtalo de nuevo.', false);
       }
     } catch {
-      setStatus('Error de conexión. Inténtalo de nuevo o escríbeme por email.', false);
+      setStatus('Error de conexión. Inténtalo de nuevo o escríbeme por LinkedIn.', false);
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Enviar mensaje';

@@ -22,6 +22,12 @@ export const projects: Project[] = [
     repo: 'https://github.com/P1p2gamer26/Drogueria_try',
     tech: ['Python', 'Django 5', 'DRF', 'PostgreSQL', 'JWT', 'PWA', 'Nginx', 'Cloudflare'],
     featured: true,
+    gallery: [
+      '/proyectos/systefarma/hero.jpg',
+      '/proyectos/systefarma/panel.jpg',
+      '/proyectos/systefarma/modulos.jpg',
+      '/proyectos/systefarma/normativa.jpg',
+    ],
   },
   {
     name: 'Asistencia GABO',
@@ -30,6 +36,7 @@ export const projects: Project[] = [
     badges: ['EN PRODUCCIÓN', 'PWA', 'EDU'],
     category: 'prod',
     repo: 'https://github.com/P1p2gamer26/Asistencia_GABO',
+    url: 'https://asistencia-ggm.onrender.com/',
     tech: ['React 18', 'TypeScript', 'Vite', 'Spring Boot 3', 'Java 21', 'PostgreSQL 16', 'Docker'],
     featured: true,
     gallery: [
@@ -62,6 +69,16 @@ export const projects: Project[] = [
     badges: ['2º PUESTO', 'DATOS', 'IA'],
     category: 'ai',
     tech: ['Python', 'Pandas', 'Visualización', 'Datos Abiertos'],
+    featured: true,
+  },
+  {
+    name: 'SketchRoute',
+    tagline: 'Rutas sanitarias y de evacuación en producción',
+    desc: 'Convierte croquis de estructuras dibujados a mano en planos de evacuación editables con generación automática de rutas. Herramienta de trazado de rutas sanitarias y de escape para establecimientos, en producción.',
+    badges: ['EN PRODUCCIÓN', 'VISIÓN', 'PYTHON'],
+    category: 'ai',
+    repo: 'https://github.com/CaroUjueta/SketchRoute',
+    tech: ['Python', 'Visión por computadora', 'Procesamiento de imágenes', 'Rutas de escape'],
     featured: true,
   },
   {
