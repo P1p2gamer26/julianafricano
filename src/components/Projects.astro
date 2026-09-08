@@ -94,6 +94,7 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 
 <script>
   const cards = document.querySelectorAll('.project-card');
+  let lightboxOpen = false;
 
   /* Tilt suave en las tarjetas */
   cards.forEach((card) => {
@@ -118,6 +119,8 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     const cur = gal.querySelector('.gallery__cur') as HTMLElement;
     const count = slides.length;
     let curIdx = 0;
+    let playing = count > 1;
+    let timer: number | undefined;
 
     const update = () => {
       if (cur) cur.textContent = String(curIdx + 1);
@@ -126,26 +129,44 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
       if (next) next.disabled = curIdx === count - 1;
     };
 
-    prev?.addEventListener('click', () => {
-      if (curIdx > 0) {
-        curIdx -= 1;
-        update();
-      }
-    });
-    next?.addEventListener('click', () => {
-      if (curIdx < count - 1) {
-        curIdx += 1;
-        update();
-      }
+    const auto = () => {
+      if (!playing || lightboxOpen) return;
+      curIdx = (curIdx + 1) % count;
+      update();
+    };
+
+    const start = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(auto, 4000);
+    };
+    const stop = () => window.clearInterval(timer);
+
+    const go = (to: number) => {
+      stop();
+      curIdx = to;
+      update();
+      start();
+    };
+
+    prev?.addEventListener('click', () => go(curIdx > 0 ? curIdx - 1 : count - 1));
+    next?.addEventListener('click', () => go(curIdx < count - 1 ? curIdx + 1 : 0));
+
+    gal.addEventListener('mouseenter', () => (playing = false));
+    gal.addEventListener('mouseleave', () => {
+      playing = true;
+      start();
     });
 
     gal.addEventListener('click', (e: MouseEvent) => {
       const btn = (e.target as HTMLElement).closest('.gallery__nav');
       if (btn) return;
+      stop();
+      playing = false;
       openLightbox(gal, curIdx, e);
     });
 
     update();
+    start();
   });
 
   /* Lightbox de capturas */
@@ -175,11 +196,13 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     lbImg.alt = caps[current] || '';
     lbCap.textContent = caps[current] || '';
     lb.hidden = false;
+    lightboxOpen = true;
     document.body.style.overflow = 'hidden';
     (document.getElementById('lightboxClose') as HTMLElement)?.focus();
   };
   const close = () => {
     lb.hidden = true;
+    lightboxOpen = false;
     document.body.style.overflow = '';
     lastFocused?.focus();
   };
