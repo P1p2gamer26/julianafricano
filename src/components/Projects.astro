@@ -1,37 +1,34 @@
 ---
 import { projects } from '../data/projects';
+import { img } from '../data/site';
 import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 
 const filters = [
   { id: 'all', label: 'Todos' },
   { id: 'prod', label: 'Producción' },
-  { id: 'ai', label: 'IA' },
-  { id: 'iot', label: 'IoT' },
+  { id: 'ai', label: 'IA & Visión' },
   { id: 'academic', label: 'Académicos' },
 ];
 
 const badgeClass: Record<string, string> = {
   prod: 'badge--prod',
-  ai: 'badge--iot',
-  iot: 'badge--iot',
+  ai: 'badge--ai',
   academic: 'badge--acad',
 };
 
 const badgeLabel: Record<string, string> = {
   prod: 'Producción',
-  ai: 'IA',
-  iot: 'IoT',
+  ai: 'IA & Visión',
   academic: 'Académico',
 };
 ---
 
-<section class="section" id="proyectos">
+<section class="section section--alt" id="proyectos">
   <div class="container">
     <span class="eyebrow reveal">Proyectos</span>
     <h2 class="section-title reveal">Trabajo que ya está <span class="grad-text">rodando</span></h2>
     <p class="section-sub reveal">
-      Sistemas en producción, incursiones en IA e IoT y proyectos académicos. Cada
-      pieza con su historia y su código.
+      Productos en producción y misiones de IA aplicada. Capturas reales, no mockups.
     </p>
 
     <div class="projects__filter reveal" role="group" aria-label="Filtrar proyectos">
@@ -62,6 +59,24 @@ const badgeLabel: Record<string, string> = {
             <p class="mono" style="font-size:.8rem;color:var(--muted-2);margin-bottom:8px">{p.tagline}</p>
             <p class="project-card__desc">{p.desc}</p>
 
+            {
+              p.gallery && p.gallery.length > 0 && (
+                <div class="gallery" data-gallery>
+                  {p.gallery.slice(0, 4).map((g, gi) => (
+                    <button
+                      class="gallery__item"
+                      data-src={img(g)}
+                      data-caption={`${p.name} — captura ${gi + 1}`}
+                      aria-label={`Ver captura ${gi + 1} de ${p.name}`}
+                    >
+                      <img src={img(g)} alt={`Captura ${gi + 1} de ${p.name}`} loading="lazy" />
+                      <span class="gallery__more">+{Math.max(p.gallery.length - 4, 0)}</span>
+                    </button>
+                  ))}
+                </div>
+              )
+            }
+
             <div class="project-card__links">
               {p.repo && (
                 <a href={p.repo} target="_blank" rel="noopener" aria-label={`Código en GitHub: ${p.name}`}>
@@ -85,6 +100,18 @@ const badgeLabel: Record<string, string> = {
       }
     </div>
   </div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Anterior">‹</button>
+    <figure class="lightbox__figure">
+      <img id="lightboxImg" alt="" />
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Siguiente">›</button>
+  </div>
 </section>
 
 <script>
@@ -107,4 +134,67 @@ const badgeLabel: Record<string, string> = {
       });
     })
   );
+
+  /* Tilt suave en las tarjetas */
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (ev: MouseEvent) => {
+      if (window.matchMedia('(hover: none)').matches) return;
+      const r = card.getBoundingClientRect();
+      const x = (ev.clientX - r.left) / r.width - 0.5;
+      const y = (ev.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  /* Lightbox de capturas */
+  const lb = document.getElementById('lightbox') as HTMLElement;
+  const lbImg = document.getElementById('lightboxImg') as HTMLImageElement;
+  const lbCap = document.getElementById('lightboxCaption') as HTMLElement;
+  let items: string[] = [];
+  let caps: string[] = [];
+  let current = 0;
+
+  const open = (i: number) => {
+    current = i;
+    lbImg.src = items[i];
+    lbCap.textContent = caps[i];
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+  const close = () => {
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  };
+  const step = (d: number) => {
+    current = (current + d + items.length) % items.length;
+    lbImg.src = items[current];
+    lbCap.textContent = caps[current];
+  };
+
+  document.querySelectorAll<HTMLElement>('.gallery__item').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const gal = btn.closest('[data-gallery]') as HTMLElement | null;
+      if (!gal) return;
+      const its = gal.querySelectorAll<HTMLElement>('.gallery__item');
+      items = [...its].map((b) => b.dataset.src as string);
+      caps = [...its].map((b) => b.dataset.caption as string);
+      open(its.length > 0 && [...its].indexOf(btn) > -1 ? [...its].indexOf(btn) : 0);
+    });
+  });
+
+  document.getElementById('lightboxClose')?.addEventListener('click', close);
+  document.getElementById('lightboxPrev')?.addEventListener('click', () => step(-1));
+  document.getElementById('lightboxNext')?.addEventListener('click', () => step(1));
+  lb.addEventListener('click', (e: MouseEvent) => {
+    if (e.target === lb || e.target === lbImg) close();
+  });
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
 </script>

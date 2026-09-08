@@ -26,3 +26,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# astro preview artifacts
+.astro/preview.log
+.astro/preview2.log
+.astro/preview.json

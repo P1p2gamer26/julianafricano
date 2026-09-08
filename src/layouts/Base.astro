@@ -12,17 +12,17 @@ const { title, description } = Astro.props;
 const metaTitle = title ? `${title} — ${site.alias}` : `${site.name} — ${site.role}`;
 const metaDesc =
   description ??
-  'Portafolio profesional de Julian Felipe Africano Preciado: desarrollador Full-Stack con foco en Inteligencia Artificial, IoT y sistemas en producción. Bogotá, Colombia.';
+  'Portafolio profesional de Julian Felipe Africano Preciado: Ingeniero de Sistemas, desarrollador Full-Stack e IA. Sistemas en producción y una startup de visión por computadora. Bogotá, Colombia.';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="morado">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{metaTitle}</title>
     <meta name="description" content={metaDesc} />
-    <meta name="theme-color" content="#0a0c10" />
+    <meta name="theme-color" content="#0b0a12" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={metaTitle} />
@@ -60,6 +60,12 @@ const metaDesc =
             <a class="btn btn--primary btn--sm nav__cta" href="#contacto">Contáctame</a>
           </li>
         </ul>
+
+        <div class="nav__themes" role="group" aria-label="Cambiar tema">
+          <button class="theme-btn" data-theme-sel="morado" aria-label="Tema morado" title="Morado"></button>
+          <button class="theme-btn" data-theme-sel="claro" aria-label="Tema claro" title="Claro"></button>
+          <button class="theme-btn" data-theme-sel="oscuro" aria-label="Tema oscuro" title="Oscuro"></button>
+        </div>
 
         <button class="nav__burger" id="burger" aria-label="Abrir menú">
           <span></span>
@@ -114,6 +120,41 @@ const metaDesc =
       );
 
       document.querySelectorAll('.reveal, .project-card').forEach((el) => io.observe(el));
+
+      /* Temas: morado (default), claro, oscuro */
+      const root = document.documentElement;
+      const THEMES = ['morado', 'claro', 'oscuro'];
+      const saved = localStorage.getItem('theme');
+      if (saved && THEMES.includes(saved)) {
+        root.dataset.theme = saved;
+      } else {
+        root.dataset.theme = 'morado';
+        localStorage.setItem('theme', 'morado');
+      }
+
+      const paintTheme = () => {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) {
+          const colors: Record<string, string> = {
+            morado: '#0b0a12',
+            claro: '#f7f6fb',
+            oscuro: '#0a0c10',
+          };
+          meta.setAttribute('content', colors[root.dataset.theme as string] || colors.morado);
+        }
+        document.querySelectorAll<HTMLElement>('[data-theme-sel]').forEach((b) => {
+          b.classList.toggle('is-active', b.dataset.themeSel === root.dataset.theme);
+        });
+      };
+
+      document.querySelectorAll<HTMLElement>('[data-theme-sel]').forEach((btn) =>
+        btn.addEventListener('click', () => {
+          root.dataset.theme = btn.dataset.themeSel as string;
+          localStorage.setItem('theme', root.dataset.theme);
+          paintTheme();
+        })
+      );
+      paintTheme();
     </script>
   </body>
 </html>
