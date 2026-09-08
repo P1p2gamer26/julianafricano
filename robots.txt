@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://P1p2gamer26.github.io/julianafricano/sitemap-index.xml

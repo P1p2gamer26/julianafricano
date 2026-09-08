@@ -1,0 +1,82 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Length 1213 >>
+stream
+BT
+/F1 24 Tf
+50 770 Td
+(Julian Felipe Africano Preciado) Tj
+0 -22 Td
+/F2 13 Tf
+(Ingeniero de Sistemas - Full-Stack - IA) Tj
+0 -16 Td
+(Bogota, Colombia) Tj
+0 -16 Td
+(africanojulian@gmail.com | github.com/P1p2gamer26 | linkedin.com/in/julian-felipe-africano) Tj
+0 -30 Td
+/F1 16 Tf
+(EXPERIENCIA) Tj
+0 -20 Td
+/F2 13 Tf
+(SysteFarma - Plataforma sanitaria en produccion para droguerias colombianas) Tj
+0 -15 Td
+(Asistencia GABO - PWA offline-first para 1200 estudiantes) Tj
+0 -15 Td
+(Vision Analytics - Proyecto de IA y vision por computadora para retail) Tj
+0 -15 Td
+(DataJam 2026 - 2o puesto, datos abiertos de Bogota con IDECA) Tj
+0 -30 Td
+/F1 16 Tf
+(STACK) Tj
+0 -20 Td
+/F2 13 Tf
+(Frontend: React, Next.js, Astro, TypeScript, Vite, PWA) Tj
+0 -15 Td
+(Backend: Python, Django/DRF, Java 21, Spring Boot, Node.js) Tj
+0 -15 Td
+(IA y Vision: YOLOv8, OpenCV, Machine Learning, LLMs) Tj
+0 -15 Td
+(Datos y DevOps: PostgreSQL, Docker, Nginx, Cloudflare, CI/CD) Tj
+0 -30 Td
+/F1 16 Tf
+(FORMACION) Tj
+0 -20 Td
+/F2 13 Tf
+(Ingenieria de Sistemas - Pontificia Universidad Javeriana) Tj
+0 -15 Td
+(Participacion en GO FEST 2026 y hackathones con Python e IA) Tj
+0 -40 Td
+/F2 10 Tf
+(Generado desde julianafricano en GitHub Pages) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000062 00000 n 
+0000000122 00000 n 
+0000000261 00000 n 
+0000000339 00000 n 
+0000000412 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1680
+%%EOF
