@@ -30,18 +30,27 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 
             {
               p.gallery && p.gallery.length > 0 && (
-                <div class="gallery" data-gallery>
-                  {p.gallery.slice(0, 4).map((g, gi) => (
-                    <button
-                      class="gallery__item"
-                      data-src={img(g)}
-                      data-caption={`${p.name} — captura ${gi + 1}`}
-                      aria-label={`Ver captura ${gi + 1} de ${p.name}`}
-                    >
-                      <img src={img(g)} alt={`Captura ${gi + 1} del proyecto ${p.name}`} loading="lazy" width="400" height="300" />
-                      <span class="gallery__more">+{Math.max(p.gallery.length - 4, 0)}</span>
-                    </button>
-                  ))}
+                <div class="gallery" data-gallery data-count={p.gallery.length}>
+                  <div class="gallery__viewport">
+                    <div class="gallery__track">
+                      {p.gallery.map((g, gi) => (
+                        <div class="gallery__slide">
+                          <img
+                            src={img(g)}
+                            alt={`Captura ${gi + 1} de ${p.gallery.length} del proyecto ${p.name}`}
+                            loading="lazy"
+                            width="400"
+                            height="300"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <button class="gallery__nav gallery__nav--prev" aria-label="Captura anterior" disabled>‹</button>
+                  <button class="gallery__nav gallery__nav--next" aria-label="Captura siguiente">›</button>
+                  <span class="gallery__count">
+                    <b class="gallery__cur">1</b> / {p.gallery.length}
+                  </span>
                 </div>
               )
             }
@@ -100,6 +109,45 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     });
   });
 
+  /* Carrusel por galería */
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gal) => {
+    const slides = gal.querySelectorAll<HTMLElement>('.gallery__slide');
+    const track = gal.querySelector('.gallery__track') as HTMLElement;
+    const prev = gal.querySelector('.gallery__nav--prev') as HTMLButtonElement;
+    const next = gal.querySelector('.gallery__nav--next') as HTMLButtonElement;
+    const cur = gal.querySelector('.gallery__cur') as HTMLElement;
+    const count = slides.length;
+    let curIdx = 0;
+
+    const update = () => {
+      if (cur) cur.textContent = String(curIdx + 1);
+      if (track) track.style.transform = `translateX(-${curIdx * 100}%)`;
+      if (prev) prev.disabled = curIdx === 0;
+      if (next) next.disabled = curIdx === count - 1;
+    };
+
+    prev?.addEventListener('click', () => {
+      if (curIdx > 0) {
+        curIdx -= 1;
+        update();
+      }
+    });
+    next?.addEventListener('click', () => {
+      if (curIdx < count - 1) {
+        curIdx += 1;
+        update();
+      }
+    });
+
+    gal.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as HTMLElement).closest('.gallery__nav');
+      if (btn) return;
+      openLightbox(gal, curIdx, e);
+    });
+
+    update();
+  });
+
   /* Lightbox de capturas */
   const lb = document.getElementById('lightbox') as HTMLElement;
   const lbImg = document.getElementById('lightboxImg') as HTMLImageElement;
@@ -113,12 +161,19 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
       (el): el is HTMLElement => !!el
     );
 
-  const open = (i: number) => {
-    current = i;
-    lastFocused = document.activeElement as HTMLElement | null;
-    lbImg.src = items[i];
-    lbImg.alt = caps[i];
-    lbCap.textContent = caps[i];
+  const openLightbox = (gal: HTMLElement, i: number, ev?: MouseEvent) => {
+    const srcs = [...gal.querySelectorAll<HTMLImageElement>('.gallery__slide img')].map((im) => im.getAttribute('src') || '');
+    const alts = [...gal.querySelectorAll<HTMLImageElement>('.gallery__slide img')].map((im) => im.alt);
+    items = srcs;
+    caps = alts;
+    lastFocused = (ev?.target as HTMLElement) || (document.activeElement as HTMLElement | null);
+    current = Math.min(i, items.length - 1);
+    show();
+  };
+  const show = () => {
+    lbImg.src = items[current];
+    lbImg.alt = caps[current] || '';
+    lbCap.textContent = caps[current] || '';
     lb.hidden = false;
     document.body.style.overflow = 'hidden';
     (document.getElementById('lightboxClose') as HTMLElement)?.focus();
@@ -130,21 +185,8 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
   };
   const step = (d: number) => {
     current = (current + d + items.length) % items.length;
-    lbImg.src = items[current];
-    lbImg.alt = caps[current];
-    lbCap.textContent = caps[current];
+    show();
   };
-
-  document.querySelectorAll<HTMLElement>('.gallery__item').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const gal = btn.closest('[data-gallery]') as HTMLElement | null;
-      if (!gal) return;
-      const its = gal.querySelectorAll<HTMLElement>('.gallery__item');
-      items = [...its].map((b) => b.dataset.src as string);
-      caps = [...its].map((b) => b.dataset.caption as string);
-      open(its.length > 0 && [...its].indexOf(btn) > -1 ? [...its].indexOf(btn) : 0);
-    });
-  });
 
   document.getElementById('lightboxClose')?.addEventListener('click', close);
   document.getElementById('lightboxPrev')?.addEventListener('click', () => step(-1));
