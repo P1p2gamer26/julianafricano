@@ -1053,21 +1053,34 @@ h4 {
 .skills__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 20px;
   margin-top: 44px;
 }
 
 .skill-group {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  padding: 26px 24px 24px;
+  min-height: 168px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.skill-group::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent 72%);
+  opacity: 0.6;
 }
 
 .skill-group:hover {
   border-color: var(--badge-border);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px -22px color-mix(in srgb, var(--accent) 45%, transparent);
 }
 
 .skill-group__head {
@@ -1078,13 +1091,14 @@ h4 {
 }
 
 .skill-group__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
   display: grid;
   place-items: center;
   background: var(--badge);
   border: 1px solid var(--badge-border);
+  filter: hue-rotate(var(--shift, 0deg));
   flex-shrink: 0;
 }
 
@@ -1094,8 +1108,18 @@ h4 {
   color: var(--accent);
 }
 
-.skill-group h3 {
+.skill-group__title h3 {
   font-size: 1.02rem;
+  line-height: 1.15;
+}
+
+.skill-group__count {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-top: 3px;
 }
 
 .skill-group__tags {
@@ -1104,6 +1128,46 @@ h4 {
   gap: 8px;
 }
 
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: 99px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted-2);
+  font-weight: 500;
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.skill-tag:hover {
+  color: var(--accent-strong);
+  border-color: var(--badge-border);
+}
+
+.skill-tag--top {
+  background: var(--badge);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.skill-tag--top:hover {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.skill-tag__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Etiquetas genéricas (trayectoria, proyectos, sobre mí) */
 .tag {
   font-size: 0.78rem;
   padding: 5px 11px;
@@ -1118,12 +1182,6 @@ h4 {
 .tag:hover {
   color: var(--accent-strong);
   border-color: var(--badge-border);
-}
-
-.tag--top {
-  background: var(--badge);
-  border-color: var(--badge-border);
-  color: var(--accent-strong);
 }
 
 @media (max-width: 900px) {

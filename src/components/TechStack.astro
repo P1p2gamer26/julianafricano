@@ -15,14 +15,23 @@ import { ICONS } from '../icons';
     <div class="skills__grid">
       {
         skillGroups.map((group, gi) => (
-          <div class="skill-group reveal" style={`transition-delay: ${gi * 60}ms`}>
+          <div
+            class="skill-group reveal"
+            style={`--shift: ${gi * 22}deg; transition-delay: ${gi * 60}ms`}
+          >
             <div class="skill-group__head">
               <span class="skill-group__icon" aria-hidden="true" set:html={ICONS[group.icon]}></span>
-              <h3>{group.title}</h3>
+              <div class="skill-group__title">
+                <h3>{group.title}</h3>
+                <span class="skill-group__count">{group.items.length} habilidades</span>
+              </div>
             </div>
             <div class="skill-group__tags">
               {group.items.map((it) => (
-                <span class={`tag${it.top ? ' tag--top' : ''}`}>{it.name}</span>
+                <span class={`skill-tag${it.top ? ' skill-tag--top' : ''}`}>
+                  {it.top && <span class="skill-tag__dot" aria-hidden="true"></span>}
+                  {it.name}
+                </span>
               ))}
             </div>
           </div>
