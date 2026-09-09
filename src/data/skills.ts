@@ -41,7 +41,7 @@ export const skillGroups: SkillGroup[] = [
     items: [
       { name: 'Pandas', top: true },
       { name: 'EDA / Visualización' },
-      { name: 'Power BI' },
+      { name: 'Power BI', top: true },
       { name: 'scikit-learn' },
       { name: 'Series de tiempo (SARIMA)' },
       { name: 'SQL', top: true },
@@ -73,6 +73,13 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Claude' },
       { name: 'GitHub Copilot' },
       { name: 'Cursor' },
+      { name: 'Ollama', top: true },
+      { name: 'LM Studio' },
+      { name: 'Claude Code' },
+      { name: 'n8n' },
+      { name: 'Agentes & workflows', top: true },
+      { name: 'APIs de IA' },
+      { name: 'Autoprompting' },
     ],
   },
   {
