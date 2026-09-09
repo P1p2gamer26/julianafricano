@@ -32,6 +32,19 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
+    title: 'Ciencia de datos & BI',
+    icon: 'ai',
+    items: [
+      { name: 'Pandas', top: true },
+      { name: 'EDA / Visualización' },
+      { name: 'Power BI' },
+      { name: 'scikit-learn' },
+      { name: 'Series de tiempo (SARIMA)' },
+      { name: 'SQL', top: true },
+      { name: 'Jupyter' },
+    ],
+  },
+  {
     title: 'Visión & Video IA',
     icon: 'brain',
     items: [
