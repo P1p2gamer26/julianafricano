@@ -6,7 +6,7 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Frontend',
+    title: 'Frontend & Web',
     icon: 'code',
     items: [
       { name: 'React', top: true },
@@ -20,7 +20,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: 'Backend',
+    title: 'Backend & Datos',
     icon: 'server',
     items: [
       { name: 'Python', top: true },
@@ -29,11 +29,15 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Spring Boot' },
       { name: 'Node.js' },
       { name: 'APIs REST / JWT' },
+      { name: 'PostgreSQL', top: true },
+      { name: 'SQLite' },
+      { name: 'IndexedDB (Dexie)' },
+      { name: 'Modelado de datos' },
     ],
   },
   {
     title: 'Ciencia de datos & BI',
-    icon: 'ai',
+    icon: 'db',
     items: [
       { name: 'Pandas', top: true },
       { name: 'EDA / Visualización' },
@@ -45,7 +49,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: 'Visión & Video IA',
+    title: 'IA & Visión',
     icon: 'brain',
     items: [
       { name: 'YOLOv8', top: true },
@@ -55,6 +59,10 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Machine Learning' },
       { name: 'NumPy / Pandas' },
       { name: 'LLMs (Anthropic)' },
+      { name: 'Hugging Face' },
+      { name: 'LangChain' },
+      { name: 'PyTorch' },
+      { name: 'Whisper' },
     ],
   },
   {
@@ -65,20 +73,6 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Claude' },
       { name: 'GitHub Copilot' },
       { name: 'Cursor' },
-      { name: 'Hugging Face' },
-      { name: 'LangChain' },
-      { name: 'PyTorch' },
-      { name: 'Whisper' },
-    ],
-  },
-  {
-    title: 'Bases de datos',
-    icon: 'db',
-    items: [
-      { name: 'PostgreSQL', top: true },
-      { name: 'SQLite' },
-      { name: 'IndexedDB (Dexie)' },
-      { name: 'Modelado de datos' },
     ],
   },
   {
