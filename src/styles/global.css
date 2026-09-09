@@ -1131,40 +1131,19 @@ h4 {
 .skill-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   font-size: 0.78rem;
   padding: 5px 12px;
   border-radius: 99px;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted-2);
-  font-weight: 500;
-  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+  background: var(--badge);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  color: var(--accent-strong);
+  font-weight: 600;
+  transition: border-color 0.16s ease, color 0.16s ease;
 }
 
 .skill-tag:hover {
-  color: var(--accent-strong);
-  border-color: var(--badge-border);
-}
-
-.skill-tag--top {
-  background: var(--badge);
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
-  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
-  color: var(--accent-strong);
-  font-weight: 600;
-}
-
-.skill-tag--top:hover {
   border-color: color-mix(in srgb, var(--accent) 60%, transparent);
-}
-
-.skill-tag__dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
 }
 
 /* Etiquetas genéricas (trayectoria, proyectos, sobre mí) */

@@ -28,10 +28,7 @@ import { ICONS } from '../icons';
             </div>
             <div class="skill-group__tags">
               {group.items.map((it) => (
-                <span class={`skill-tag${it.top ? ' skill-tag--top' : ''}`}>
-                  {it.top && <span class="skill-tag__dot" aria-hidden="true"></span>}
-                  {it.name}
-                </span>
+                <span class="skill-tag">{it.name}</span>
               ))}
             </div>
           </div>
