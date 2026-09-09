@@ -3,7 +3,7 @@ export type Project = {
   tagline: string;
   desc: string;
   badges: string[];
-  category: 'prod' | 'ai';
+  category: 'prod' | 'ai' | 'academic';
   repo?: string;
   url?: string;
   tech: string[];
@@ -15,8 +15,8 @@ export const projects: Project[] = [
   {
     name: 'SysteFarma',
     tagline: 'Plataforma en producción para droguerías colombianas',
-    desc: 'Gestión normativa y operativa para droguerías: registros GIRASA/SGC, documentación, avisos, reportes en PDF y notificaciones por WhatsApp. Desplegada con PostgreSQL, Nginx y Cloudflare.',
-    badges: ['EN PRODUCCIÓN', 'FULL-STACK', 'SaaS'],
+    desc: 'Gestiona la documentación normativa y operativa de droguerías (GIRASA/SGC): avisos, reportes en PDF y notificaciones por WhatsApp. La desarrollo y mantengo como freelance, desplegada con PostgreSQL, Nginx y Cloudflare.',
+    badges: ['EN PRODUCCIÓN', 'FREELANCE', 'FULL-STACK', 'SaaS'],
     category: 'prod',
     url: 'https://systefarma.com',
     repo: 'https://github.com/P1p2gamer26/Drogueria_try',
@@ -89,5 +89,50 @@ export const projects: Project[] = [
     category: 'prod',
     repo: 'https://github.com/P1p2gamer26/SistemaPos',
     tech: ['Python', 'Django', 'JS', 'POS', 'Inventario'],
+  },
+  {
+    name: 'CODEFEST 2026',
+    tagline: 'Recuperación de información con búsqueda vectorial',
+    desc: 'Sistema de recuperación: indexación con embeddings en cascada (MiniLM → GTE → E5), grafo de 224.101 nodos y 754.876 aristas. F1@3 0.499, NDCG@10 0.558 y 189 tests.',
+    badges: ['IA', 'NLP', 'HACKATHON'],
+    category: 'ai',
+    repo: 'https://github.com/P1p2gamer26/CODEFEST_2026-1',
+    tech: ['Python', 'FAISS', 'HuggingFace', 'Streamlit', 'Retrieval'],
+  },
+  {
+    name: 'Proyecto IA 4',
+    tagline: 'ML para la salud pública de Bogotá',
+    desc: 'Clasificación de riesgo de conducta suicida con datos abiertos de la Secretaría Distrital de Salud (~254.000 casos 2012–2026): EDA, Random Forest, SVM y MLP.',
+    badges: ['IA', 'ML', 'DATOS'],
+    category: 'ai',
+    repo: 'https://github.com/P1p2gamer26/ProyectoIA4',
+    tech: ['Python', 'Pandas', 'scikit-learn'],
+  },
+  {
+    name: 'Huntrix Marrakech',
+    tagline: 'Juego de mesa Marrakech en tiempo real',
+    desc: 'Multijugador online por turnos del juego Marrakech: lobby, chat y ranking con WebSockets en una sola sesión, clientes de escritorio con JavaFX.',
+    badges: ['TIEMPO REAL', 'MULTIJUGADOR'],
+    category: 'academic',
+    repo: 'https://github.com/P1p2gamer26/Huntrix_Fis',
+    tech: ['Java', 'Spring Boot', 'WebSockets', 'JavaFX'],
+  },
+  {
+    name: 'Automatización Documental',
+    tagline: 'Paquetes normativos generados en masa',
+    desc: 'Motor VBA que genera masivamente los paquetes documentales PGIRASA/SGC/PIP para los clientes de Cymetrical Metrología y Calibraciones (droguerías, laboratorios, salud). En uso real.',
+    badges: ['EN PRODUCCIÓN', 'AUTOMATIZACIÓN'],
+    category: 'prod',
+    repo: 'https://github.com/P1p2gamer26/Automatizacion_Formatos_Pgiraza-SGC',
+    tech: ['VBA', 'Excel', 'Word', 'PGIRASA', 'SGC'],
+  },
+  {
+    name: 'Ecommerce Android',
+    tagline: 'Tienda móvil con Jetpack Compose',
+    desc: 'App de e-commerce en Kotlin con Compose: catálogo, carrito y navegación tipada con Material 3.',
+    badges: ['MOBILE', 'KOTLIN', 'COMPOSE'],
+    category: 'academic',
+    repo: 'https://github.com/P1p2gamer26/Taller1-Ecommerce-Android',
+    tech: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Coil'],
   },
 ];

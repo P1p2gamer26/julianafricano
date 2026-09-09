@@ -17,8 +17,8 @@ export const timeline: TimelineItem[] = [
   {
     period: '2026',
     title: 'SysteFarma',
-    role: 'Plataforma en producción · Full-stack',
-    desc: 'Plataforma de gestión sanitaria y operativa para droguerías colombianas, en producción con dominios reales, PostgreSQL y CDN.',
+    role: 'Desarrollo freelance · Deploy en producción',
+    desc: 'Por encargo (freelance): plataforma de gestión sanitaria y operativa para droguerías colombianas, en producción con dominios reales, PostgreSQL y CDN.',
     tags: ['Django', 'PostgreSQL', 'Nginx', 'DevOps'],
   },
   {
