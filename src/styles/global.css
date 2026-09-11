@@ -1,48 +1,48 @@
 /* ============================================================
    Julian Africano — Global Styles
-   3 temas: morado (default), claro y oscuro
+   3 temas: azul (default), claro y oscuro
    ============================================================ */
 
-/* ---------- Tema morado (default) ---------- */
+/* ---------- Tema azul (default) ---------- */
 :root,
-[data-theme='morado'] {
-  --bg: #0b0a12;
-  --bg-alt: #0f0d1a;
-  --surface: #151228;
-  --surface-hover: #1a1630;
+[data-theme='azul'] {
+  --bg: #0a1220;
+  --bg-alt: #0d1728;
+  --surface: #12203a;
+  --surface-hover: #16243f;
   --border: rgba(255, 255, 255, 0.07);
   --border-strong: rgba(255, 255, 255, 0.12);
 
-  --text: #e9e6f4;
+  --text: #e6ecf6;
   --text-strong: #ffffff;
-  --muted: #a29bbd;
-  --muted-2: #726c8f;
+  --muted: #9fb0ca;
+  --muted-2: #6b7d9c;
 
-  --accent: #a78bfa;
-  --accent-strong: #c4b5fd;
-  --accent-2: #e879f9;
-  --accent-rgb: 167, 139, 250;
-  --accent-2-rgb: 232, 121, 249;
-  --accent-grad: linear-gradient(120deg, #a78bfa 0%, #e879f9 100%);
+  --accent: #60a5fa;
+  --accent-strong: #93c5fd;
+  --accent-2: #818cf8;
+  --accent-rgb: 96, 165, 250;
+  --accent-2-rgb: 129, 140, 248;
+  --accent-grad: linear-gradient(120deg, #60a5fa 0%, #818cf8 100%);
 
-  --badge: rgba(167, 139, 250, 0.1);
-  --badge-border: rgba(167, 139, 250, 0.3);
+  --badge: rgba(96, 165, 250, 0.1);
+  --badge-border: rgba(96, 165, 250, 0.3);
 
-  --acad: #d8b4fe;
-  --acad-rgb: 216, 180, 254;
-  --ai-accent: #f0abfc;
-  --ai-rgb: 240, 171, 252;
+  --acad: #93c5fd;
+  --acad-rgb: 147, 197, 253;
+  --ai-accent: #818cf8;
+  --ai-rgb: 129, 140, 248;
 
-  --nav-bg: rgba(11, 10, 18, 0.82);
-  --nav-bg-solid: rgba(11, 10, 18, 0.97);
+  --nav-bg: rgba(10, 18, 32, 0.82);
+  --nav-bg-solid: rgba(10, 18, 32, 0.97);
   --hover-bg: rgba(255, 255, 255, 0.05);
   --soft-bg: rgba(255, 255, 255, 0.02);
   --tag-bg: rgba(255, 255, 255, 0.04);
   --grid-line: rgba(255, 255, 255, 0.028);
-  --shell: #100d1d;
+  --shell: #0e1a2e;
   --btn-on: #ffffff;
-  --scroll-thumb: #2a2740;
-  --scroll-thumb-hover: #3a3554;
+  --scroll-thumb: #1d2c47;
+  --scroll-thumb-hover: #28395c;
 
   --danger: #f87171;
 }
@@ -497,8 +497,8 @@ h4 {
   transform: translateY(-2px) scale(1.08);
 }
 
-.theme-btn[data-theme-sel='morado'] {
-  background: linear-gradient(135deg, #a78bfa, #e879f9);
+.theme-btn[data-theme-sel='azul'] {
+  background: linear-gradient(135deg, #60a5fa, #818cf8);
 }
 .theme-btn[data-theme-sel='claro'] {
   background: linear-gradient(135deg, #ffffff, #e4e1f2);
