@@ -22,7 +22,7 @@ export const site = {
   github: 'https://github.com/P1p2gamer26',
   linkedin: 'https://www.linkedin.com/in/julian-felipe-africano-44b84b281/',
   instagram: 'https://www.instagram.com/julianafricano/',
-  talento: 'https://talento.javeriana.edu.co',
+  talento: 'https://talento.javeriana.edu.co/account',
   base,
   host: 'https://P1p2gamer26.github.io',
   formEndpoint: 'https://formspree.io/f/REEMPLAZA_ESTE_ID_FORMS',
