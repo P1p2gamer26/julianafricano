@@ -115,7 +115,8 @@ const structuredData = {
         <span>
           Hecho con <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> ·
           <a href={site.github} target="_blank" rel="noopener">GitHub</a> ·
-          <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a> ·
+          <a href={site.talento} target="_blank" rel="noopener">Talento Javeriano</a>
         </span>
       </div>
     </footer>
@@ -153,7 +154,17 @@ const structuredData = {
         { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
       );
 
-      document.querySelectorAll('.reveal, .project-card').forEach((el) => io.observe(el));
+      document.querySelectorAll('.reveal, .project-card').forEach((el) => {
+        io.observe(el);
+        el.addEventListener(
+          'animationend',
+          () => {
+            el.classList.remove('is-visible');
+            el.classList.add('reveal-done');
+          },
+          { once: true }
+        );
+      });
 
       /* Temas: morado (default), claro, oscuro */
       const root = document.documentElement;

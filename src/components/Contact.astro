@@ -1,11 +1,12 @@
 ---
 import { site } from '../data/site';
-import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON } from '../icons';
+import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON, TALENTO_ICON } from '../icons';
 
 const socials = [
   { name: 'GitHub', handle: '@P1p2gamer26', href: site.github, icon: GITHUB_ICON },
   { name: 'LinkedIn', handle: 'Julian Felipe Africano', href: site.linkedin, icon: LINKEDIN_ICON },
   { name: 'Instagram', handle: '@julianafricano', href: site.instagram, icon: INSTAGRAM_ICON },
+  { name: 'Talento Javeriano', handle: 'Portal Talento+', href: site.talento, icon: TALENTO_ICON },
 ];
 ---
 
@@ -43,7 +44,7 @@ const socials = [
       <div class="contact__divider" role="presentation"><span>o escríbeme directo</span></div>
 
       <div class="contact__cta">
-        <a class="btn btn--primary" href={`${site.base}/CV-Julian-Africano.pdf`} download>
+        <a class="btn btn--primary" href={site.cvHref} download="CV-Julian-Africano.pdf">
           Descargar CV
         </a>
         <a class="btn" href={site.linkedin} target="_blank" rel="noopener">

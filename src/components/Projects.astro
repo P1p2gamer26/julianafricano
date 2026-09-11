@@ -17,61 +17,63 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
         projects.map((p, idx) => (
           <article
             class="project-card"
-            style={`transition-delay: ${(idx % 3) * 70}ms`}
+            style={`--card-delay: ${(idx % 3) * 70}ms`}
           >
-            <div class="project-card__top">
-              <span class="project-card__icon" aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span>
-              <span class="badge badge--prod">{p.category === 'ai' ? 'IA & Visión' : 'Producción'}</span>
-            </div>
+            <div class="project-card__inner">
+              <div class="project-card__top">
+                <span class="project-card__icon" aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span>
+                <span class="badge badge--prod">{p.category === 'ai' ? 'IA & Visión' : 'Producción'}</span>
+              </div>
 
-            <h3>{p.name}</h3>
-            <p class="mono" style="font-size:.8rem;color:var(--muted-2);margin-bottom:8px">{p.tagline}</p>
-            <p class="project-card__desc">{p.desc}</p>
+              <h3>{p.name}</h3>
+              <p class="mono" style="font-size:.8rem;color:var(--muted-2);margin-bottom:8px">{p.tagline}</p>
+              <p class="project-card__desc">{p.desc}</p>
 
-            {
-              p.gallery && p.gallery.length > 0 && (
-                <div class="gallery" data-gallery data-count={p.gallery.length}>
-                  <div class="gallery__viewport">
-                    <div class="gallery__track">
-                      {p.gallery.map((g, gi) => (
-                        <div class="gallery__slide">
-                          <img
-                            src={img(g)}
-                            alt={`Captura ${gi + 1} de ${p.gallery.length} del proyecto ${p.name}`}
-                            loading="lazy"
-                            width="400"
-                            height="300"
-                          />
-                        </div>
-                      ))}
+              {
+                p.gallery && p.gallery.length > 0 && (
+                  <div class="gallery" data-gallery data-count={p.gallery.length}>
+                    <div class="gallery__viewport">
+                      <div class="gallery__track">
+                        {p.gallery.map((g, gi) => (
+                          <div class="gallery__slide">
+                            <img
+                              src={img(g)}
+                              alt={`Captura ${gi + 1} de ${p.gallery.length} del proyecto ${p.name}`}
+                              loading="lazy"
+                              width="400"
+                              height="300"
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
+                    <button class="gallery__nav gallery__nav--prev" aria-label="Captura anterior" disabled>‹</button>
+                    <button class="gallery__nav gallery__nav--next" aria-label="Captura siguiente">›</button>
+                    <span class="gallery__count">
+                      <b class="gallery__cur">1</b> / {p.gallery.length}
+                    </span>
                   </div>
-                  <button class="gallery__nav gallery__nav--prev" aria-label="Captura anterior" disabled>‹</button>
-                  <button class="gallery__nav gallery__nav--next" aria-label="Captura siguiente">›</button>
-                  <span class="gallery__count">
-                    <b class="gallery__cur">1</b> / {p.gallery.length}
-                  </span>
-                </div>
-              )
-            }
+                )
+              }
 
-            <div class="project-card__links">
-              {p.repo && (
-                <a href={p.repo} target="_blank" rel="noopener" aria-label={`Código en GitHub: ${p.name}`}>
-                  <span set:html={GITHUB_ICON} /> Repo
-                </a>
-              )}
-              {p.url && (
-                <a href={p.url} target="_blank" rel="noopener">
-                  <span set:html={EXTERNAL_ICON} /> Sitio
-                </a>
-              )}
-            </div>
+              <div class="project-card__links">
+                {p.repo && (
+                  <a href={p.repo} target="_blank" rel="noopener" aria-label={`Código en GitHub: ${p.name}`}>
+                    <span set:html={GITHUB_ICON} /> Repo
+                  </a>
+                )}
+                {p.url && (
+                  <a href={p.url} target="_blank" rel="noopener">
+                    <span set:html={EXTERNAL_ICON} /> Sitio
+                  </a>
+                )}
+              </div>
 
-            <div class="skill-group__tags" style="margin-top:auto;padding-top:16px">
-              {p.tech.slice(0, 5).map((t) => (
-                <span class="tag">{t}</span>
-              ))}
+              <div class="skill-group__tags" style="margin-top:auto;padding-top:16px">
+                {p.tech.slice(0, 5).map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </div>
             </div>
           </article>
         ))
@@ -98,15 +100,17 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 
   /* Tilt suave en las tarjetas */
   cards.forEach((card) => {
+    const tilt = card.querySelector('.project-card__inner') as HTMLElement | null;
+    if (!tilt) return;
     card.addEventListener('mousemove', (ev: MouseEvent) => {
       if (window.matchMedia('(hover: none)').matches) return;
       const r = card.getBoundingClientRect();
       const x = (ev.clientX - r.left) / r.width - 0.5;
       const y = (ev.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `perspective(900px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-4px)`;
+      tilt.style.transform = `perspective(900px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-4px)`;
     });
     card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
+      tilt.style.transform = '';
     });
   });
 

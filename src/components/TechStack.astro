@@ -17,7 +17,7 @@ import { ICONS } from '../icons';
         skillGroups.map((group, gi) => (
           <div
             class="skill-group reveal"
-            style={`--shift: ${gi * 22}deg; transition-delay: ${gi * 60}ms`}
+            style={`--shift: ${gi * 22}deg; --reveal-delay: ${gi * 60}ms`}
           >
             <div class="skill-group__head">
               <span class="skill-group__icon" aria-hidden="true" set:html={ICONS[group.icon]}></span>

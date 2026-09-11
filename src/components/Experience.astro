@@ -14,7 +14,7 @@ import { timeline } from '../data/timeline';
     <div class="timeline">
       {
         timeline.map((t, idx) => (
-          <div class="timeline__item reveal" style={`transition-delay: ${idx * 70}ms`}>
+          <div class="timeline__item reveal" style={`--reveal-delay: ${idx * 70}ms`}>
             <span class="timeline__period">{t.period}</span>
             <h3>{t.title}</h3>
             <div class="role">{t.role}</div>
