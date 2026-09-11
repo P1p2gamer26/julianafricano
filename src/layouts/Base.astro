@@ -40,13 +40,13 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang="es-CO" data-theme="azul">
+<html lang="es-CO" data-theme="oscuro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{metaTitle}</title>
     <meta name="description" content={metaDesc} />
-    <meta name="theme-color" content="#0a1220" />
+    <meta name="theme-color" content="#0a0c10" />
     <meta name="author" content={site.name} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
@@ -104,7 +104,7 @@ const structuredData = {
               ))
             }
           </select>
-          <button class="theme-btn" data-theme-sel="azul" data-i18n-aria="theme.azul" data-i18n-title="theme.azul" aria-label="Tema azul" title="Azul"></button>
+          <button class="theme-btn" data-theme-sel="morado" data-i18n-aria="theme.morado" data-i18n-title="theme.morado" aria-label="Tema morado" title="Morado"></button>
           <button class="theme-btn" data-theme-sel="claro" data-i18n-aria="theme.claro" data-i18n-title="theme.claro" aria-label="Tema claro" title="Claro"></button>
           <button class="theme-btn" data-theme-sel="oscuro" data-i18n-aria="theme.oscuro" data-i18n-title="theme.oscuro" aria-label="Tema oscuro" title="Oscuro"></button>
         </div>
@@ -268,26 +268,26 @@ const structuredData = {
         );
       });
 
-      /* Temas: azul (default), claro, oscuro */
+      /* Temas: morado, claro, oscuro (default azul cielo) */
       const root = document.documentElement;
-      const THEMES = ['azul', 'claro', 'oscuro'];
+      const THEMES = ['morado', 'claro', 'oscuro'];
       const saved = localStorage.getItem('theme');
       if (saved && THEMES.includes(saved)) {
         root.dataset.theme = saved;
       } else {
-        root.dataset.theme = 'azul';
-        localStorage.setItem('theme', 'azul');
+        root.dataset.theme = 'oscuro';
+        localStorage.setItem('theme', 'oscuro');
       }
 
       const paintTheme = () => {
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) {
           const colors: Record<string, string> = {
-            azul: '#0a1220',
+            morado: '#0b0a12',
             claro: '#f7f6fb',
             oscuro: '#0a0c10',
           };
-          meta.setAttribute('content', colors[root.dataset.theme as string] || colors.azul);
+          meta.setAttribute('content', colors[root.dataset.theme as string] || colors.oscuro);
         }
         document.querySelectorAll<HTMLElement>('[data-theme-sel]').forEach((b) => {
           b.classList.toggle('is-active', b.dataset.themeSel === root.dataset.theme);

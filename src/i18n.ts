@@ -61,9 +61,9 @@ export const translations: Record<string, Record<LangCode, string>> = {
     es: 'Cambiar tema',
     en: 'Change theme',
   },
-  'theme.azul': {
-    es: 'Tema azul',
-    en: 'Blue theme',
+  'theme.morado': {
+    es: 'Tema morado',
+    en: 'Purple theme',
   },
   'theme.claro': {
     es: 'Tema claro',
