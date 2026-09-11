@@ -13,11 +13,11 @@ const socials = [
 <section class="section contact" id="contacto">
   <div class="container">
     <div class="contact__card reveal">
-      <span class="eyebrow" style="justify-content:center">Contacto</span>
-      <h2 class="contact__title">
+      <span class="eyebrow" style="justify-content:center" data-i18n="contact.eyebrow">Contacto</span>
+      <h2 class="contact__title" data-i18n="contact.title" data-i18n-html>
         ¿Tienes un proyecto <span class="grad-text">en mente</span>?
       </h2>
-      <p class="contact__text">
+      <p class="contact__text" data-i18n="contact.text">
         ¿Una plataforma full-stack, visión por computadora para tu tienda o una
         idea que necesita un ingeniero? Hablemos.
       </p>
@@ -25,8 +25,8 @@ const socials = [
       <form class="contact__form" id="contactForm" data-endpoint={site.formEndpoint} novalidate>
         <div class="contact__fields">
           <label class="field">
-            <span class="field__label">Nombre</span>
-            <input type="text" name="name" placeholder="Tu nombre" required autocomplete="name" />
+            <span class="field__label" data-i18n="contact.name">Nombre</span>
+            <input type="text" name="name" placeholder="Tu nombre" data-i18n-ph="contact.ph.name" required autocomplete="name" />
           </label>
           <label class="field">
             <span class="field__label">Email</span>
@@ -34,22 +34,22 @@ const socials = [
           </label>
         </div>
         <label class="field">
-          <span class="field__label">Mensaje</span>
-          <textarea name="message" rows="4" placeholder="Cuéntame sobre tu proyecto…" required></textarea>
+          <span class="field__label" data-i18n="contact.message">Mensaje</span>
+          <textarea name="message" rows="4" placeholder="Cuéntame sobre tu proyecto…" data-i18n-ph="contact.ph.message" required></textarea>
         </label>
-        <button class="btn btn--primary" type="submit">Enviar mensaje</button>
+        <button class="btn btn--primary" type="submit" data-i18n="contact.submit">Enviar mensaje</button>
         <p class="contact__form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
       </form>
 
-      <div class="contact__divider" role="presentation"><span>o escríbeme directo</span></div>
+      <div class="contact__divider" role="presentation"><span data-i18n="contact.divider">o escríbeme directo</span></div>
 
       <div class="contact__cta">
-        <a class="btn btn--primary" href={site.cvHref} download="CV-Julian-Africano.pdf">
+        <a class="btn btn--primary" href={site.cvHref} download="CV-Julian-Africano.pdf" data-i18n="contact.cv">
           Descargar CV
         </a>
         <a class="btn" href={site.linkedin} target="_blank" rel="noopener">
           <span set:html={LINKEDIN_ICON} />
-          Conectar en LinkedIn
+          <span data-i18n="contact.linkedin">Conectar en LinkedIn</span>
         </a>
       </div>
 
@@ -72,6 +72,11 @@ const socials = [
   const endpoint = form.dataset.endpoint as string;
   const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 
+  const t = (key: string): string => {
+    const i18n = (window as unknown as { __I18N?: { t: (k: string) => string } }).__I18N;
+    return i18n ? i18n.t(key) : '';
+  };
+
   const setStatus = (msg: string, ok: boolean) => {
     status.textContent = msg;
     status.hidden = false;
@@ -81,11 +86,11 @@ const socials = [
   form.addEventListener('submit', async (e: Event) => {
     e.preventDefault();
     if (!form.checkValidity()) {
-      setStatus('Por favor completa todos los campos correctamente.', false);
+      setStatus(t('contact.status.invalid'), false);
       return;
     }
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando…';
+    submitBtn.textContent = t('contact.sending') || 'Enviando…';
     setStatus('', true);
     status.hidden = true;
 
@@ -93,17 +98,20 @@ const socials = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        setStatus('¡Mensaje enviado! Te responderé pronto.', true);
+        setStatus(t('contact.status.ok'), true);
         form.reset();
       } else {
         const body = await res.json().catch(() => ({}));
-        setStatus((body as { errors?: { message?: string }[] }).errors?.[0]?.message ?? 'No se pudo enviar. Inténtalo de nuevo.', false);
+        setStatus(
+          (body as { errors?: { message?: string }[] }).errors?.[0]?.message ?? t('contact.status.server'),
+          false
+        );
       }
     } catch {
-      setStatus('Error de conexión. Inténtalo de nuevo o escríbeme por LinkedIn.', false);
+      setStatus(t('contact.status.network'), false);
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Enviar mensaje';
+      submitBtn.textContent = t('contact.submit') || 'Enviar mensaje';
     }
   });
 </script>

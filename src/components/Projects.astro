@@ -6,9 +6,9 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 
 <section class="section section--alt" id="proyectos">
   <div class="container">
-    <span class="eyebrow reveal">Proyectos</span>
-    <h2 class="section-title reveal">Trabajo que ya está <span class="grad-text">rodando</span></h2>
-    <p class="section-sub reveal">
+    <span class="eyebrow reveal" data-i18n="projects.eyebrow">Proyectos</span>
+    <h2 class="section-title reveal" data-i18n="projects.title" data-i18n-html>Trabajo que ya está <span class="grad-text">rodando</span></h2>
+    <p class="section-sub reveal" data-i18n="projects.subtitle">
       Productos en producción y misiones de IA aplicada. Capturas reales, no mockups.
     </p>
 
@@ -22,12 +22,12 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
             <div class="project-card__inner">
               <div class="project-card__top">
                 <span class="project-card__icon" aria-hidden="true">{p.name.slice(0, 2).toUpperCase()}</span>
-                <span class="badge badge--prod">{p.category === 'ai' ? 'IA & Visión' : 'Producción'}</span>
+                <span class="badge badge--prod" data-i18n={p.category === 'ai' ? 'projects.badge.ai' : 'projects.badge.prod'}>{p.category === 'ai' ? 'IA & Visión' : 'Producción'}</span>
               </div>
 
               <h3>{p.name}</h3>
-              <p class="mono" style="font-size:.8rem;color:var(--muted-2);margin-bottom:8px">{p.tagline}</p>
-              <p class="project-card__desc">{p.desc}</p>
+              <p class="mono" style="font-size:.8rem;color:var(--muted-2);margin-bottom:8px" data-i18n={`projects.${idx}.tagline`}>{p.tagline}</p>
+              <p class="project-card__desc" data-i18n={`projects.${idx}.desc`}>{p.desc}</p>
 
               {
                 p.gallery && p.gallery.length > 0 && (
@@ -39,6 +39,10 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
                             <img
                               src={img(g)}
                               alt={`Captura ${gi + 1} de ${p.gallery.length} del proyecto ${p.name}`}
+                              data-i18n-alt="projects.capture"
+                              data-n={gi + 1}
+                              data-total={p.gallery.length}
+                              data-name={p.name}
                               loading="lazy"
                               width="400"
                               height="300"
@@ -47,8 +51,8 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
                         ))}
                       </div>
                     </div>
-                    <button class="gallery__nav gallery__nav--prev" aria-label="Captura anterior" disabled>‹</button>
-                    <button class="gallery__nav gallery__nav--next" aria-label="Captura siguiente">›</button>
+                    <button class="gallery__nav gallery__nav--prev" data-i18n-aria="projects.prev" aria-label="Captura anterior" disabled>‹</button>
+                    <button class="gallery__nav gallery__nav--next" data-i18n-aria="projects.next" aria-label="Captura siguiente">›</button>
                     <span class="gallery__count">
                       <b class="gallery__cur">1</b> / {p.gallery.length}
                     </span>
@@ -58,13 +62,13 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 
               <div class="project-card__links">
                 {p.repo && (
-                  <a href={p.repo} target="_blank" rel="noopener" aria-label={`Código en GitHub: ${p.name}`}>
+                  <a href={p.repo} target="_blank" rel="noopener" aria-label={`Código en GitHub: ${p.name}`} data-i18n-aria="projects.repoAria" data-name={p.name}>
                     <span set:html={GITHUB_ICON} /> Repo
                   </a>
                 )}
                 {p.url && (
                   <a href={p.url} target="_blank" rel="noopener">
-                    <span set:html={EXTERNAL_ICON} /> Sitio
+                    <span set:html={EXTERNAL_ICON} /> <span data-i18n="projects.url">Sitio</span>
                   </a>
                 )}
               </div>
@@ -81,16 +85,16 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     </div>
   </div>
 
-  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Visor de capturas">
-    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar visor">
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" data-i18n-aria="projects.lightbox.aria" aria-label="Visor de capturas">
+    <button class="lightbox__close" id="lightboxClose" data-i18n-aria="projects.close" aria-label="Cerrar visor">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
-    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Captura anterior">‹</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" data-i18n-aria="projects.prev" aria-label="Captura anterior">‹</button>
     <figure class="lightbox__figure">
       <img id="lightboxImg" alt="" />
       <figcaption id="lightboxCaption"></figcaption>
     </figure>
-    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Captura siguiente">›</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" data-i18n-aria="projects.next" aria-label="Captura siguiente">›</button>
   </div>
 </section>
 

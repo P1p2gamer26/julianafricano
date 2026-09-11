@@ -5,9 +5,9 @@ import { ICONS } from '../icons';
 
 <section class="section section--alt" id="stack">
   <div class="container">
-    <span class="eyebrow reveal">Stack</span>
-    <h2 class="section-title reveal">Tecnologías con las que <span class="grad-text">construyo</span></h2>
-    <p class="section-sub reveal">
+    <span class="eyebrow reveal" data-i18n="stack.eyebrow">Stack</span>
+    <h2 class="section-title reveal" data-i18n="stack.title" data-i18n-html>Tecnologías con las que <span class="grad-text">construyo</span></h2>
+    <p class="section-sub reveal" data-i18n="stack.subtitle">
       Del frontend al modelo de visión, de la base de datos al servidor en
       producción. Un stack para resolver problemas de punta a punta.
     </p>
@@ -22,13 +22,13 @@ import { ICONS } from '../icons';
             <div class="skill-group__head">
               <span class="skill-group__icon" aria-hidden="true" set:html={ICONS[group.icon]}></span>
               <div class="skill-group__title">
-                <h3>{group.title}</h3>
-                <span class="skill-group__count">{group.items.length} habilidades</span>
+                <h3 data-i18n={`stack.groups.${gi}.title`}>{group.title}</h3>
+                <span class="skill-group__count" data-i18n="stack.count" data-n={group.items.length}>{group.items.length} habilidades</span>
               </div>
             </div>
             <div class="skill-group__tags">
               {group.items.map((it) => (
-                <span class="skill-tag">{it.name}</span>
+                <span class="skill-tag" data-i18n={`stack.items.${it.name}`}>{it.name}</span>
               ))}
             </div>
           </div>

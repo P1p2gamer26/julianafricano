@@ -4,9 +4,9 @@ import { timeline } from '../data/timeline';
 
 <section class="section section--alt" id="trayectoria">
   <div class="container">
-    <span class="eyebrow reveal">Trayectoria</span>
-    <h2 class="section-title reveal">Mi camino en <span class="grad-text">ingenier&iacute;a</span> y c&oacute;digo</h2>
-    <p class="section-sub reveal">
+    <span class="eyebrow reveal" data-i18n="experience.eyebrow">Trayectoria</span>
+    <h2 class="section-title reveal" data-i18n="experience.title" data-i18n-html>Mi camino en <span class="grad-text">ingenier&iacute;a</span> y c&oacute;digo</h2>
+    <p class="section-sub reveal" data-i18n="experience.subtitle">
       Un camino autodidacta que terminó en sistemas en producción para
       organizaciones reales.
     </p>
@@ -15,13 +15,13 @@ import { timeline } from '../data/timeline';
       {
         timeline.map((t, idx) => (
           <div class="timeline__item reveal" style={`--reveal-delay: ${idx * 70}ms`}>
-            <span class="timeline__period">{t.period}</span>
-            <h3>{t.title}</h3>
-            <div class="role">{t.role}</div>
-            <p>{t.desc}</p>
+            <span class="timeline__period" data-i18n={`experience.${idx}.period`}>{t.period}</span>
+            <h3 data-i18n={`experience.${idx}.title`}>{t.title}</h3>
+            <div class="role" data-i18n={`experience.${idx}.role`}>{t.role}</div>
+            <p data-i18n={`experience.${idx}.desc`}>{t.desc}</p>
             <div class="timeline__tags">
               {t.tags.map((tag) => (
-                <span class="tag">{tag}</span>
+                <span class="tag" data-i18n={`experience.tags.${tag}`}>{tag}</span>
               ))}
             </div>
           </div>

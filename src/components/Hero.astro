@@ -7,7 +7,7 @@ import { site } from '../data/site';
   <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__content">
-      <span class="hero__status">Disponible para nuevos proyectos</span>
+      <span class="hero__status" data-i18n="hero.status">Disponible para nuevos proyectos</span>
 
       <p class="hero__kicker">
         <span class="mono">
@@ -17,24 +17,24 @@ import { site } from '../data/site';
         <span class="grad-text mono">Julian Felipe Africano Preciado</span>
       </p>
 
-      <h1 class="hero__title">
+      <h1 class="hero__title" data-i18n="hero.title" data-i18n-html>
         Ingeniero de <span class="grad-text">Sistemas</span> y
         <span class="grad-text">Ciencia de Datos</span>
         <br />
         Full-Stack · IA · Visión por computadora
       </h1>
 
-      <p class="hero__lead">
+      <p class="hero__lead" data-i18n="hero.lead" data-i18n-html>
         Construyo productos de punta a punta y he desplegado
         <strong>plataformas en producción</strong> como SysteFarma —que desarrollo como
         <strong>freelance</strong>— y Asistencia GABO. De la idea al deploy en producción.
       </p>
 
       <div class="hero__cta">
-        <a class="btn btn--primary" href="#proyectos">Ver proyectos</a>
-        <a class="btn" href={site.cvHref} download="CV-Julian-Africano.pdf">Descargar CV</a>
+        <a class="btn btn--primary" href="#proyectos" data-i18n="hero.cta.proyectos">Ver proyectos</a>
+        <a class="btn" href={site.cvHref} download="CV-Julian-Africano.pdf" data-i18n="hero.cta.cv">Descargar CV</a>
         <a class="btn" href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="#contacto">Contáctame</a>
+        <a class="btn" href="#contacto" data-i18n="hero.cta.contacto">Contáctame</a>
       </div>
 
       <div class="hero__meta">
@@ -44,11 +44,11 @@ import { site } from '../data/site';
         </span>
         <span class="hero__meta-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1" /><path d="M22 4 12 14l-3-3" /></svg>
-          Sistemas · Datos · IA
+          <span data-i18n="hero.meta.sistemas">Sistemas · Datos · IA</span>
         </span>
         <span class="hero__meta-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 8l-9 5-9-5V6l9 5 9-5v2Z" /><path d="M3 6h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z" /></svg>
-          <a href="#contacto">Escríbeme por el formulario</a>
+          <a href="#contacto" data-i18n="hero.meta.formulario">Escríbeme por el formulario</a>
         </span>
       </div>
     </div>
@@ -58,6 +58,7 @@ import { site } from '../data/site';
         <img
           src={`${site.base}/perfil.jpg`}
           alt="Retrato de Julian Felipe Africano Preciado"
+          data-i18n-alt="hero.photoAlt"
           width="800"
           height="800"
           loading="eager"
