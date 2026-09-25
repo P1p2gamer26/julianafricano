@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { projects } from '../data/projects';
+import { site } from '../data/site';
 import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 ---
 
@@ -76,6 +77,11 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
                 {p.url && (
                   <a href={p.url} target="_blank" rel="noopener">
                     <span set:html={EXTERNAL_ICON} /> <span data-i18n="projects.url">Sitio</span>
+                  </a>
+                )}
+                {p.slug && p.case && (
+                  <a href={`${site.base}/proyectos/${p.slug}/`} data-i18n="projects.caseStudy">
+                    Caso de estudio →
                   </a>
                 )}
               </div>

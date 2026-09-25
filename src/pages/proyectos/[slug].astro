@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import { site } from '../../data/site';
+import { projects } from '../../data/projects';
+import { GITHUB_ICON, EXTERNAL_ICON } from '../../icons';
+
+export function getStaticPaths() {
+  return projects
+    .filter((p) => p.slug && p.case)
+    .map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const p = project;
+const c = p.case!;
+
+const DIAGRAMS: Record<string, string> = {
+  systefarma: `<svg viewBox="0 0 640 160" role="img" aria-labelledby="dg-t"><title id="dg-t">Flujo de despliegue de SysteFarma</title>
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="10" y="55" width="130" height="50" rx="8"/>
+      <rect x="185" y="55" width="150" height="50" rx="8"/>
+      <rect x="380" y="55" width="120" height="50" rx="8"/>
+      <rect x="545" y="55" width="85" height="50" rx="8"/>
+      <path d="M140 80h40" marker-end="url(#ar)"/>
+      <path d="M335 80h40" marker-end="url(#ar)"/>
+      <path d="M500 80h40" marker-end="url(#ar)"/>
+    </g>
+    <g font-size="13" fill="currentColor" text-anchor="middle" font-family="sans-serif">
+      <text x="75" y="84">Droguería</text>
+      <text x="260" y="78">SysteFarma</text>
+      <text x="260" y="94">Django + DRF</text>
+      <text x="440" y="84">PostgreSQL</text>
+      <text x="587" y="78">Nginx +</text>
+      <text x="587" y="94">Cloudflare</text>
+    </g>
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4z" fill="currentColor"/></marker></defs>
+  </svg>`,
+  pos: `<svg viewBox="0 0 640 170" role="img" aria-labelledby="dg-t"><title id="dg-t">Flujo offline-first del POS</title>
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="10" y="60" width="130" height="50" rx="8"/>
+      <rect x="185" y="60" width="150" height="50" rx="8"/>
+      <rect x="380" y="60" width="130" height="50" rx="8"/>
+      <rect x="255" y="10" width="150" height="40" rx="8" stroke-dasharray="4 3"/>
+      <path d="M140 85h40" marker-end="url(#ar2)"/>
+      <path d="M335 85h40" marker-end="url(#ar2)"/>
+      <path d="M330 60v-10h-45" marker-end="url(#ar2)"/>
+    </g>
+    <g font-size="13" fill="currentColor" text-anchor="middle" font-family="sans-serif">
+      <text x="75" y="89">Venta offline</text>
+      <text x="75" y="105">(UUID local)</text>
+      <text x="260" y="83">Sync al volver</text>
+      <text x="260" y="99">deduplica por UUID</text>
+      <text x="445" y="83">Webhook</text>
+      <text x="445" y="99">HMAC → Systefarma</text>
+      <text x="330" y="34">FEFO + lotes</text>
+    </g>
+    <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4z" fill="currentColor"/></marker></defs>
+  </svg>`,
+  rutas: `<svg viewBox="0 0 640 150" role="img" aria-labelledby="dg-t"><title id="dg-t">Pipeline de SketchRoute</title>
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="10" y="50" width="120" height="50" rx="8"/>
+      <rect x="175" y="50" width="150" height="50" rx="8"/>
+      <rect x="370" y="50" width="130" height="50" rx="8"/>
+      <rect x="535" y="50" width="95" height="50" rx="8"/>
+      <path d="M130 75h45" marker-end="url(#ar3)"/>
+      <path d="M325 75h45" marker-end="url(#ar3)"/>
+      <path d="M500 75h35" marker-end="url(#ar3)"/>
+    </g>
+    <g font-size="13" fill="currentColor" text-anchor="middle" font-family="sans-serif">
+      <text x="70" y="79">Foto croquis</text>
+      <text x="250" y="73">OpenCV: color,</text>
+      <text x="250" y="89">líneas, recintos</text>
+      <text x="435" y="73">Editor Fabric.js</text>
+      <text x="435" y="89">rutas A* cliente</text>
+      <text x="582" y="79">PDF</text>
+    </g>
+    <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4z" fill="currentColor"/></marker></defs>
+  </svg>`,
+};
+---
+
+<Base title={p.name} description={p.tagline}>
+  <main>
+    <section class="section" style="padding-top:calc(var(--nav-h) + 40px)">
+      <div class="container" style="max-width:780px">
+        <a href={`${site.base}/#proyectos`} class="mono" style="color:var(--muted);font-size:.85rem">&larr; Volver a proyectos</a>
+
+        <h1 class="section-title" style="margin-top:14px">{p.name}</h1>
+        <p class="section-sub">{p.tagline}</p>
+
+        <div class="project-card__links" style="margin:18px 0 28px">
+          {p.repo && (
+            <a href={p.repo} target="_blank" rel="noopener"><span set:html={GITHUB_ICON} /> Repo</a>
+          )}
+          {p.url && (
+            <a href={p.url} target="_blank" rel="noopener"><span set:html={EXTERNAL_ICON} /> Sitio</a>
+          )}
+        </div>
+
+        {p.gallery && p.gallery[0] && (
+          <Image src={p.gallery[0]} alt={`Captura de ${p.name}`} widths={[400, 800, 1200]} sizes="(max-width: 780px) 100vw, 780px" loading="eager" style="border-radius:var(--radius-md);margin-bottom:32px;width:100%;height:auto" />
+        )}
+
+        <h2 style="margin-bottom:10px">Mi rol</h2>
+        <p style="margin-bottom:28px;color:var(--muted)">{c.role}</p>
+
+        <h2 style="margin-bottom:10px">El problema</h2>
+        <p style="margin-bottom:28px;color:var(--muted)">{c.problem}</p>
+
+        {p.slug && DIAGRAMS[p.slug] && (
+          <>
+            <h2 style="margin-bottom:10px">Cómo funciona</h2>
+            <div style="color:var(--text);margin-bottom:28px" set:html={DIAGRAMS[p.slug]} />
+          </>
+        )}
+
+        <h2 style="margin-bottom:10px">Decisiones técnicas</h2>
+        <ul style="margin-bottom:28px;color:var(--muted);display:grid;gap:10px;padding-left:20px">
+          {c.decisions.map((d) => <li>{d}</li>)}
+        </ul>
+
+        <h2 style="margin-bottom:10px">Métricas</h2>
+        <ul style="margin-bottom:8px;color:var(--muted);display:grid;gap:6px;padding-left:20px">
+          {c.metrics.map((m) => <li>{m}</li>)}
+        </ul>
+      </div>
+    </section>
+  </main>
+</Base>

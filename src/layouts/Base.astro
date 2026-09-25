@@ -80,19 +80,19 @@ const structuredData = {
   <body>
     <nav class="nav" id="nav" data-i18n-aria="nav.navAria" aria-label="Navegación principal">
       <div class="nav__inner">
-        <a class="nav__logo" href="#inicio" data-i18n-aria="nav.logoAria" aria-label="Inicio">
+        <a class="nav__logo" href={`${site.base}/#inicio`} data-i18n-aria="nav.logoAria" aria-label="Inicio">
           <span class="nav__logo-mark">JA</span>
           <span>{site.alias}</span>
         </a>
 
         <ul class="nav__links" id="navLinks">
-          <li><a class="nav__link" href="#inicio" data-i18n="nav.inicio">Inicio</a></li>
-          <li><a class="nav__link" href="#sobre-mi" data-i18n="nav.sobre">Sobre mí</a></li>
-          <li><a class="nav__link" href="#stack" data-i18n="nav.stack">Stack</a></li>
-          <li><a class="nav__link" href="#proyectos" data-i18n="nav.proyectos">Proyectos</a></li>
-          <li><a class="nav__link" href="#trayectoria" data-i18n="nav.trayectoria">Trayectoria</a></li>
+          <li><a class="nav__link" href={`${site.base}/#inicio`} data-i18n="nav.inicio">Inicio</a></li>
+          <li><a class="nav__link" href={`${site.base}/#sobre-mi`} data-i18n="nav.sobre">Sobre mí</a></li>
+          <li><a class="nav__link" href={`${site.base}/#stack`} data-i18n="nav.stack">Stack</a></li>
+          <li><a class="nav__link" href={`${site.base}/#proyectos`} data-i18n="nav.proyectos">Proyectos</a></li>
+          <li><a class="nav__link" href={`${site.base}/#trayectoria`} data-i18n="nav.trayectoria">Trayectoria</a></li>
           <li>
-            <a class="btn btn--primary btn--sm nav__cta" href="#contacto" data-i18n="nav.contacto">Contáctame</a>
+            <a class="btn btn--primary btn--sm nav__cta" href={`${site.base}/#contacto`} data-i18n="nav.contacto">Contáctame</a>
           </li>
         </ul>
 

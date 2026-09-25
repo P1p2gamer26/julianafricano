@@ -317,6 +317,10 @@ export const translations: Record<string, Record<LangCode, string>> = {
     es: 'Reproducir carrusel',
     en: 'Play carousel',
   },
+  'projects.caseStudy': {
+    es: 'Caso de estudio →',
+    en: 'Case study →',
+  },
   'projects.lightbox.aria': {
     es: 'Visor de capturas',
     en: 'Screenshot viewer',
