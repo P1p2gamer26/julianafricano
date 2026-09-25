@@ -24,7 +24,7 @@ export const timeline: TimelineItem[] = [
   {
     period: 'Ene 2026 — Actualidad',
     title: 'SysteFarma',
-    role: 'Cofundador técnico · Desarrollo freelance',
+    role: 'Cofundador técnico · Desarrollador Full-Stack',
     desc: 'Cofundador técnico de la plataforma: cumplimiento regulatorio (Res. 591/2024, Res. 1403/2007), PGIRASA, auditorías, indicadores, contratos con firma electrónica, PQRSF con QR y módulo de rutas de evacuación. En producción con droguerías reales pagando por el servicio.',
     tags: ['Django', 'PostgreSQL', 'Nginx', 'DevOps'],
   },

@@ -13,12 +13,12 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: '{name} — {role}',
   },
   'meta.role': {
-    es: 'Ingeniero de Sistemas · Ciencia de Datos · Full-Stack',
-    en: 'Systems Engineer · Data Science · Full-Stack',
+    es: 'Estudiante de Ingeniería de Sistemas y Ciencia de Datos (6.º semestre)',
+    en: 'Systems Engineering & Data Science student (6th semester)',
   },
   'meta.desc': {
-    es: 'Portafolio profesional de Julian Felipe Africano Preciado: Ingeniero de Sistemas, desarrollador Full-Stack e IA. Plataformas en producción como SysteFarma. Bogotá, Colombia.',
-    en: 'Professional portfolio of Julian Felipe Africano Preciado: Systems Engineer, Full-Stack & AI developer. Production platforms like SysteFarma. Bogotá, Colombia.',
+    es: 'Portafolio de Julian Felipe Africano Preciado: estudiante de Ingeniería de Sistemas y Ciencia de Datos (6.º semestre), desarrollador Full-Stack e IA. Buscando práctica profesional 2027-1. Plataformas en producción como SysteFarma. Bogotá, Colombia.',
+    en: 'Portfolio of Julian Felipe Africano Preciado: Systems Engineering & Data Science student (6th semester), Full-Stack & AI developer. Seeking a 2027-1 internship. Production platforms like SysteFarma. Bogotá, Colombia.',
   },
 
   'nav.navAria': {
@@ -79,16 +79,16 @@ export const translations: Record<string, Record<LangCode, string>> = {
   },
 
   'hero.status': {
-    es: 'Disponible para nuevos proyectos',
-    en: 'Available for new projects',
+    es: 'Buscando práctica profesional 2027-1',
+    en: 'Seeking a 2027-1 internship',
   },
   'hero.title': {
-    es: 'Ingeniero de <span class="grad-text">Sistemas</span> y <span class="grad-text">Ciencia de Datos</span><br />Full-Stack · IA · Visión por computadora',
-    en: '<span class="grad-text">Systems</span> Engineer &amp; <span class="grad-text">Data Science</span><br />Full-Stack · AI · Computer Vision',
+    es: 'Estudiante de Ingeniería de <span class="grad-text">Sistemas</span> y <span class="grad-text">Ciencia de Datos</span> · 6.º semestre<br />Full-Stack · IA · Visión por computadora',
+    en: '<span class="grad-text">Systems</span> Engineering &amp; <span class="grad-text">Data Science</span> student · 6th semester<br />Full-Stack · AI · Computer Vision',
   },
   'hero.lead': {
-    es: 'Construyo productos de punta a punta y he desplegado <strong>plataformas en producción</strong> como SysteFarma — que desarrollo como <strong>freelance</strong> — y Asistencia GABO. De la idea al deploy en producción.',
-    en: 'I build end-to-end products and have shipped <strong>production platforms</strong> such as SysteFarma — which I develop as a <strong>freelancer</strong> — and Asistencia GABO. From idea to production deploy.',
+    es: 'Construyo productos de punta a punta y he desplegado <strong>plataformas en producción</strong> como SysteFarma — que <strong>cofundé y desarrollo</strong> — y Asistencia GABO. De la idea al deploy en producción.',
+    en: 'I build end-to-end products and have shipped <strong>production platforms</strong> such as SysteFarma — which I <strong>co-founded and build</strong> — and Asistencia GABO. From idea to production deploy.',
   },
   'hero.cta.proyectos': {
     es: 'Ver proyectos',
@@ -128,8 +128,8 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: 'Systems Engineering & Data Science student at Javeriana, with platforms shipped to production.',
   },
   'about.box': {
-    es: 'He desplegado plataformas web en producción: <strong>SysteFarma</strong>, desarrollada como <strong>freelance</strong>, y <strong>Asistencia GABO</strong>, un sistema de asistencia escolar para 1.200 estudiantes.',
-    en: 'I have shipped web platforms to production: <strong>SysteFarma</strong>, developed as a <strong>freelancer</strong>, and <strong>Asistencia GABO</strong>, a school attendance system for 1,200 students.',
+    es: 'He desplegado plataformas web en producción: <strong>SysteFarma</strong>, que cofundé como líder técnico, y <strong>Asistencia GABO</strong>, un sistema de asistencia escolar para 1.200 estudiantes.',
+    en: 'I have shipped web platforms to production: <strong>SysteFarma</strong>, which I co-founded as technical lead, and <strong>Asistencia GABO</strong>, a school attendance system for 1,200 students.',
   },
   'about.focus': {
     es: 'Mi enfoque: <strong>productos que funcionan de verdad</strong>. Backend sólido, frontend cuidado y la mano del ingeniero que lleva un proyecto hasta el deploy.',
@@ -318,8 +318,8 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: 'Production platform for Colombian drugstores',
   },
   'projects.0.desc': {
-    es: 'Cofundador técnico (desarrollo freelance): cumplimiento regulatorio Res. 591/2024 y 1403/2007, PGIRASA, auditorías, indicadores, contratos con firma electrónica, PQRSF con QR y módulo de rutas de evacuación. Droguerías reales pagan por el servicio.',
-    en: 'Technical co-founder (freelance development): regulatory compliance Res. 591/2024 and 1403/2007, PGIRASA, audits, KPIs, e-signature contracts, PQRSF with QR, and an evacuation routes module. Real drugstores pay for the service.',
+    es: 'Cofundador técnico y desarrollador full-stack: cumplimiento regulatorio Res. 591/2024 y 1403/2007, PGIRASA, auditorías, indicadores, contratos con firma electrónica, PQRSF con QR y módulo de rutas de evacuación. Droguerías reales pagan por el servicio.',
+    en: 'Technical co-founder and full-stack developer: regulatory compliance Res. 591/2024 and 1403/2007, PGIRASA, audits, KPIs, e-signature contracts, PQRSF with QR, and an evacuation routes module. Real drugstores pay for the service.',
   },
   'projects.1.tagline': {
     es: 'Asistencia offline-first para 1.200 estudiantes',
@@ -346,8 +346,8 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: 'Two 2026 challenges: the Bogotá DataJam (suicide risk and mental health with SARIMA/Holt-Winters time series on open District data) and CODEFEST AD ASTRA (retrieval system with FAISS and three cascaded encoders, F1@3 0.499).',
   },
   'projects.4.tagline': {
-    es: 'Fotos de croquis convertidas en planos de evacuación',
-    en: 'Sketch photos turned into evacuation floor plans',
+    es: 'Desarrollador principal · fotos de croquis convertidas en planos de evacuación',
+    en: 'Lead developer · sketch photos turned into evacuation floor plans',
   },
   'projects.4.desc': {
     es: 'Pipeline de OpenCV que vectoriza croquis dibujados a mano (paredes, puertas, muebles), editor con Fabric.js y rutas de evacuación/sanitarias automáticas con A* en el navegador. Exporta a PDF. En uso por droguerías para rutas sanitarias reales.',
@@ -415,8 +415,8 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: 'SysteFarma',
   },
   'experience.2.role': {
-    es: 'Cofundador técnico · Desarrollo freelance',
-    en: 'Technical co-founder · Freelance development',
+    es: 'Cofundador técnico · Desarrollador Full-Stack',
+    en: 'Technical co-founder · Full-Stack developer',
   },
   'experience.2.desc': {
     es: 'Cofundador técnico de la plataforma: cumplimiento regulatorio (Res. 591/2024, Res. 1403/2007), PGIRASA, auditorías, indicadores, contratos con firma electrónica, PQRSF con QR y módulo de rutas de evacuación. En producción con droguerías reales pagando por el servicio.',
@@ -532,12 +532,12 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: 'Contact',
   },
   'contact.title': {
-    es: '¿Tienes un proyecto <span class="grad-text">en mente</span>?',
-    en: 'Have a project <span class="grad-text">in mind</span>?',
+    es: '¿Buscas practicante para <span class="grad-text">2027-1</span>?',
+    en: 'Hiring an intern for <span class="grad-text">2027-1</span>?',
   },
   'contact.text': {
-    es: '¿Una plataforma full-stack, visión por computadora para tu tienda o una idea que necesita un ingeniero? Hablemos.',
-    en: 'A full-stack platform, computer vision for your store, or an idea that needs an engineer? Let\'s talk.',
+    es: 'Busco práctica profesional en desarrollo de software, datos o IA para el semestre 2027-1. Si tu equipo tiene una vacante, revisa mi CV y escríbeme.',
+    en: 'I\'m looking for a software, data or AI internship for the 2027-1 semester. If your team has an opening, check my CV and get in touch.',
   },
   'contact.name': {
     es: 'Nombre',
@@ -552,8 +552,8 @@ export const translations: Record<string, Record<LangCode, string>> = {
     en: 'Message',
   },
   'contact.ph.message': {
-    es: 'Cuéntame sobre tu proyecto…',
-    en: 'Tell me about your project…',
+    es: 'Cuéntame sobre la vacante o el equipo…',
+    en: 'Tell me about the role or the team…',
   },
   'contact.submit': {
     es: 'Enviar mensaje',

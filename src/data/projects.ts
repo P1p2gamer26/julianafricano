@@ -15,8 +15,8 @@ export const projects: Project[] = [
   {
     name: 'SysteFarma',
     tagline: 'Plataforma en producción para droguerías colombianas',
-    desc: 'Cofundador técnico (desarrollo freelance): cumplimiento regulatorio Res. 591/2024 y 1403/2007, PGIRASA, auditorías, indicadores, contratos con firma electrónica, PQRSF con QR y módulo de rutas de evacuación. Droguerías reales pagan por el servicio.',
-    badges: ['EN PRODUCCIÓN', 'FREELANCE', 'FULL-STACK'],
+    desc: 'Cofundador técnico y desarrollador full-stack: cumplimiento regulatorio Res. 591/2024 y 1403/2007, PGIRASA, auditorías, indicadores, contratos con firma electrónica, PQRSF con QR y módulo de rutas de evacuación. Droguerías reales pagan por el servicio.',
+    badges: ['EN PRODUCCIÓN', 'COFUNDADOR', 'FULL-STACK'],
     category: 'prod',
     url: 'https://systefarma.com',
     repo: 'https://github.com/P1p2gamer26/Drogueria_try',
@@ -73,11 +73,12 @@ export const projects: Project[] = [
   },
   {
     name: 'SketchRoute',
-    tagline: 'Fotos de croquis convertidas en planos de evacuación',
+    tagline: 'Desarrollador principal · fotos de croquis convertidas en planos de evacuación',
     desc: 'Pipeline de OpenCV que vectoriza croquis dibujados a mano (paredes, puertas, muebles), editor con Fabric.js y rutas de evacuación/sanitarias automáticas con A* en el navegador. Exporta a PDF. En uso por droguerías para rutas sanitarias reales.',
     badges: ['VISIÓN', 'PYTHON', 'WEB'],
     category: 'ai',
     repo: 'https://github.com/CaroUjueta/SketchRoute',
+    url: 'https://rutas.systefarma.com',
     tech: ['Django 5', 'OpenCV', 'Fabric.js', 'A*', 'PDF'],
     gallery: [
       '/proyectos/sketchroute/editor-rutas.png',
@@ -91,6 +92,7 @@ export const projects: Project[] = [
     badges: ['EN PRODUCCIÓN', 'PWA', 'OFFLINE-FIRST'],
     category: 'prod',
     repo: 'https://github.com/P1p2gamer26/SistemaPos',
+    url: 'https://pos.systefarma.com',
     tech: ['Python', 'Django', 'SPA', 'FEFO', 'Webhooks'],
     gallery: [
       '/proyectos/pos/pos-venta.png',

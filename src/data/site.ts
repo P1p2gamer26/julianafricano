@@ -17,7 +17,7 @@ function cvVersion(): string {
 export const site = {
   name: 'Julian Felipe Africano Preciado',
   alias: 'Julian Africano',
-  role: 'Ingeniero de Sistemas · Ciencia de Datos · Full-Stack',
+  role: 'Estudiante de Ingeniería de Sistemas y Ciencia de Datos (6.º semestre)',
   location: 'Bogotá, Colombia',
   github: 'https://github.com/P1p2gamer26',
   linkedin: 'https://www.linkedin.com/in/julian-felipe-africano-44b84b281/',
