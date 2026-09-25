@@ -2,6 +2,8 @@
 import { site } from '../data/site';
 import { GITHUB_ICON, LINKEDIN_ICON, INSTAGRAM_ICON, TALENTO_ICON } from '../icons';
 
+const formReady = !site.formEndpoint.includes('REEMPLAZA');
+
 const socials = [
   { name: 'GitHub', handle: '@P1p2gamer26', href: site.github, icon: GITHUB_ICON },
   { name: 'LinkedIn', handle: 'Julian Felipe Africano', href: site.linkedin, icon: LINKEDIN_ICON },
@@ -22,24 +24,32 @@ const socials = [
         semestre 2027-1. Si tu equipo tiene una vacante, revisa mi CV y escríbeme.
       </p>
 
-      <form class="contact__form" id="contactForm" data-endpoint={site.formEndpoint} novalidate>
-        <div class="contact__fields">
+      {formReady && (
+        <form class="contact__form" id="contactForm" data-endpoint={site.formEndpoint} novalidate>
+          <div class="contact__fields">
+            <label class="field">
+              <span class="field__label" data-i18n="contact.name">Nombre</span>
+              <input type="text" name="name" placeholder="Tu nombre" data-i18n-ph="contact.ph.name" required autocomplete="name" />
+            </label>
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+            </label>
+          </div>
           <label class="field">
-            <span class="field__label" data-i18n="contact.name">Nombre</span>
-            <input type="text" name="name" placeholder="Tu nombre" data-i18n-ph="contact.ph.name" required autocomplete="name" />
+            <span class="field__label" data-i18n="contact.message">Mensaje</span>
+            <textarea name="message" rows="4" placeholder="Cuéntame sobre la vacante o el equipo…" data-i18n-ph="contact.ph.message" required></textarea>
           </label>
-          <label class="field">
-            <span class="field__label">Email</span>
-            <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+          <label class="field field--check">
+            <input type="checkbox" name="consent" required />
+            <span data-i18n="contact.consent" data-i18n-html>
+              Autorizo el tratamiento de mis datos personales según la <a href={`${site.base}/privacidad/`}>Política de Privacidad</a> (Ley 1581 de 2012).
+            </span>
           </label>
-        </div>
-        <label class="field">
-          <span class="field__label" data-i18n="contact.message">Mensaje</span>
-          <textarea name="message" rows="4" placeholder="Cuéntame sobre la vacante o el equipo…" data-i18n-ph="contact.ph.message" required></textarea>
-        </label>
-        <button class="btn btn--primary" type="submit" data-i18n="contact.submit">Enviar mensaje</button>
-        <p class="contact__form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
-      </form>
+          <button class="btn btn--primary" type="submit" data-i18n="contact.submit">Enviar mensaje</button>
+          <p class="contact__form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
+        </form>
+      )}
 
       <div class="contact__divider" role="presentation"><span data-i18n="contact.divider">o escríbeme directo</span></div>
 
@@ -67,8 +77,10 @@ const socials = [
 </section>
 
 <script>
-  const form = document.getElementById('contactForm') as HTMLFormElement;
-  const status = document.getElementById('formStatus') as HTMLElement;
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const status = document.getElementById('formStatus') as HTMLElement | null;
+
+  if (form && status) {
   const endpoint = form.dataset.endpoint as string;
   const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 
@@ -114,4 +126,5 @@ const socials = [
       submitBtn.textContent = t('contact.submit') || 'Enviar mensaje';
     }
   });
+  }
 </script>

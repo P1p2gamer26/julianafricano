@@ -1795,6 +1795,28 @@ h4 {
   box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
 }
 
+.field--check {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 10px 8px;
+}
+
+.field--check input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.field--check span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.field--check a {
+  color: var(--accent-strong);
+}
+
 .contact__form .btn {
   justify-self: start;
 }

@@ -563,6 +563,10 @@ export const translations: Record<string, Record<LangCode, string>> = {
     es: 'Cuéntame sobre la vacante o el equipo…',
     en: 'Tell me about the role or the team…',
   },
+  'contact.consent': {
+    es: 'Autorizo el tratamiento de mis datos personales según la <a href="/julianafricano/privacidad/">Política de Privacidad</a> (Ley 1581 de 2012).',
+    en: 'I authorize the processing of my personal data under the <a href="/julianafricano/privacidad/">Privacy Policy</a> (Colombian Law 1581 of 2012).',
+  },
   'contact.submit': {
     es: 'Enviar mensaje',
     en: 'Send message',
