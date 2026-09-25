@@ -1,6 +1,6 @@
 ---
+import { Image } from 'astro:assets';
 import { projects } from '../data/projects';
-import { img } from '../data/site';
 import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 ---
 
@@ -36,16 +36,18 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
                       <div class="gallery__track">
                         {p.gallery.map((g, gi) => (
                           <div class="gallery__slide">
-                            <img
-                              src={img(g)}
+                            <Image
+                              src={g}
                               alt={`Captura ${gi + 1} de ${p.gallery.length} del proyecto ${p.name}`}
                               data-i18n-alt="projects.capture"
                               data-n={gi + 1}
                               data-total={p.gallery.length}
                               data-name={p.name}
+                              data-full={g.src}
+                              widths={[400, 800]}
+                              sizes="(max-width: 700px) 100vw, 400px"
                               loading="lazy"
-                              width="400"
-                              height="300"
+                              decoding="async"
                             />
                           </div>
                         ))}
@@ -53,6 +55,11 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
                     </div>
                     <button class="gallery__nav gallery__nav--prev" data-i18n-aria="projects.prev" aria-label="Captura anterior" disabled>‹</button>
                     <button class="gallery__nav gallery__nav--next" data-i18n-aria="projects.next" aria-label="Captura siguiente">›</button>
+                    {p.gallery.length > 1 && (
+                      <button type="button" class="gallery__toggle" data-i18n-aria="projects.pause" aria-label="Pausar carrusel" aria-pressed="false">
+                        <span class="gallery__toggle-icon" aria-hidden="true">❚❚</span>
+                      </button>
+                    )}
                     <span class="gallery__count">
                       <b class="gallery__cur">1</b> / {p.gallery.length}
                     </span>
@@ -101,13 +108,20 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
 <script>
   const cards = document.querySelectorAll('.project-card');
   let lightboxOpen = false;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const canHover = () => window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches;
+
+  const t = (key: string): string => {
+    const i18n = (window as unknown as { __I18N?: { t: (k: string) => string } }).__I18N;
+    return (i18n && i18n.t(key)) || '';
+  };
 
   /* Tilt suave en las tarjetas */
   cards.forEach((card) => {
     const tilt = card.querySelector('.project-card__inner') as HTMLElement | null;
     if (!tilt) return;
     card.addEventListener('mousemove', (ev: MouseEvent) => {
-      if (window.matchMedia('(hover: none)').matches) return;
+      if (!canHover()) return;
       const r = card.getBoundingClientRect();
       const x = (ev.clientX - r.left) / r.width - 0.5;
       const y = (ev.clientY - r.top) / r.height - 0.5;
@@ -124,10 +138,12 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     const track = gal.querySelector('.gallery__track') as HTMLElement;
     const prev = gal.querySelector('.gallery__nav--prev') as HTMLButtonElement;
     const next = gal.querySelector('.gallery__nav--next') as HTMLButtonElement;
+    const toggle = gal.querySelector('.gallery__toggle') as HTMLButtonElement | null;
     const cur = gal.querySelector('.gallery__cur') as HTMLElement;
     const count = slides.length;
     let curIdx = 0;
-    let playing = count > 1;
+    let userPaused = reduceMotion.matches;
+    let hovered = false;
     let timer: number | undefined;
 
     const update = () => {
@@ -137,20 +153,26 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
       if (next) next.disabled = curIdx === count - 1;
     };
 
-    const auto = () => {
-      if (!playing || lightboxOpen) return;
-      curIdx = (curIdx + 1) % count;
-      update();
+    const paintToggle = () => {
+      if (!toggle) return;
+      toggle.setAttribute('aria-pressed', String(userPaused));
+      const label = userPaused ? t('projects.play') || 'Reproducir carrusel' : t('projects.pause') || 'Pausar carrusel';
+      toggle.setAttribute('aria-label', label);
+      toggle.querySelector('.gallery__toggle-icon')!.textContent = userPaused ? '▶' : '❚❚';
     };
 
-    const start = () => {
-      window.clearInterval(timer);
-      timer = window.setInterval(auto, 4000);
-    };
     const stop = () => window.clearInterval(timer);
 
-    const go = (to: number) => {
+    const start = () => {
       stop();
+      if (userPaused || hovered || document.hidden || lightboxOpen || count < 2) return;
+      timer = window.setInterval(() => {
+        curIdx = (curIdx + 1) % count;
+        update();
+      }, 4000);
+    };
+
+    const go = (to: number) => {
       curIdx = to;
       update();
       start();
@@ -159,21 +181,45 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     prev?.addEventListener('click', () => go(curIdx > 0 ? curIdx - 1 : count - 1));
     next?.addEventListener('click', () => go(curIdx < count - 1 ? curIdx + 1 : 0));
 
-    gal.addEventListener('mouseenter', () => (playing = false));
+    toggle?.addEventListener('click', () => {
+      userPaused = !userPaused;
+      paintToggle();
+      start();
+    });
+
+    gal.addEventListener('mouseenter', () => {
+      hovered = true;
+      start();
+    });
     gal.addEventListener('mouseleave', () => {
-      playing = true;
+      hovered = false;
+      start();
+    });
+    gal.addEventListener('focusin', () => {
+      hovered = true;
+      start();
+    });
+    gal.addEventListener('focusout', (e: FocusEvent) => {
+      if (gal.contains(e.relatedTarget as Node)) return;
+      hovered = false;
+      start();
+    });
+    document.addEventListener('visibilitychange', start);
+    gal.addEventListener('carousel:resume', start);
+    reduceMotion.addEventListener('change', () => {
+      userPaused = reduceMotion.matches || userPaused;
+      paintToggle();
       start();
     });
 
     gal.addEventListener('click', (e: MouseEvent) => {
-      const btn = (e.target as HTMLElement).closest('.gallery__nav');
+      const btn = (e.target as HTMLElement).closest('.gallery__nav, .gallery__toggle');
       if (btn) return;
-      stop();
-      playing = false;
       openLightbox(gal, curIdx, e);
     });
 
     update();
+    paintToggle();
     start();
   });
 
@@ -191,7 +237,7 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     );
 
   const openLightbox = (gal: HTMLElement, i: number, ev?: MouseEvent) => {
-    const srcs = [...gal.querySelectorAll<HTMLImageElement>('.gallery__slide img')].map((im) => im.getAttribute('src') || '');
+    const srcs = [...gal.querySelectorAll<HTMLImageElement>('.gallery__slide img')].map((im) => im.dataset.full || im.getAttribute('src') || '');
     const alts = [...gal.querySelectorAll<HTMLImageElement>('.gallery__slide img')].map((im) => im.alt);
     items = srcs;
     caps = alts;
@@ -213,6 +259,7 @@ import { GITHUB_ICON, EXTERNAL_ICON } from '../icons';
     lightboxOpen = false;
     document.body.style.overflow = '';
     lastFocused?.focus();
+    document.querySelectorAll('[data-gallery]').forEach((gal) => gal.dispatchEvent(new Event('carousel:resume')));
   };
   const step = (d: number) => {
     current = (current + d + items.length) % items.length;

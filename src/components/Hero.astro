@@ -68,3 +68,25 @@ import { site } from '../data/site';
     </div>
   </div>
 </section>
+
+<script>
+  const hero = document.querySelector('.hero') as HTMLElement | null;
+  const mq = window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)');
+  if (hero && mq.matches) {
+    let raf = 0;
+    const move = (ev: PointerEvent) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const r = hero.getBoundingClientRect();
+        hero.style.setProperty('--mx', String(((ev.clientX - r.left) / r.width - 0.5) * 2));
+        hero.style.setProperty('--my', String(((ev.clientY - r.top) / r.height - 0.5) * 2));
+      });
+    };
+    hero.addEventListener('pointermove', move);
+    hero.addEventListener('pointerleave', () => {
+      hero.style.setProperty('--mx', '0');
+      hero.style.setProperty('--my', '0');
+    });
+  }
+</script>

@@ -309,6 +309,14 @@ export const translations: Record<string, Record<LangCode, string>> = {
     es: 'Cerrar visor',
     en: 'Close viewer',
   },
+  'projects.pause': {
+    es: 'Pausar carrusel',
+    en: 'Pause carousel',
+  },
+  'projects.play': {
+    es: 'Reproducir carrusel',
+    en: 'Play carousel',
+  },
   'projects.lightbox.aria': {
     es: 'Visor de capturas',
     en: 'Screenshot viewer',

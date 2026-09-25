@@ -868,6 +868,8 @@ h4 {
   top: 4%;
   right: -60px;
   animation: floaty 9s ease-in-out infinite alternate;
+  translate: calc(var(--mx, 0) * 40px) calc(var(--my, 0) * 40px);
+  transition: translate 0.6s ease-out;
 }
 
 .hero__glow--2 {
@@ -875,6 +877,13 @@ h4 {
   bottom: -40px;
   left: -140px;
   animation: floaty 12s ease-in-out infinite alternate-reverse;
+  translate: calc(var(--mx, 0) * -30px) calc(var(--my, 0) * -30px);
+  transition: translate 0.6s ease-out;
+}
+
+.hero__card {
+  translate: calc(var(--mx, 0) * -8px) calc(var(--my, 0) * -8px);
+  transition: translate 0.6s ease-out;
 }
 
 @keyframes floaty {
@@ -1410,6 +1419,30 @@ h4 {
   backdrop-filter: blur(4px);
 }
 
+.gallery__toggle {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 99px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.gallery__toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* Lightbox */
 .lightbox {
   position: fixed;
@@ -1863,5 +1896,10 @@ h4 {
   .terminal__body .tline {
     opacity: 1;
     transform: none;
+  }
+
+  .hero__glow,
+  .hero__card {
+    translate: none !important;
   }
 }
