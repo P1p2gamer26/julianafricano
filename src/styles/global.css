@@ -740,6 +740,17 @@ h4 {
   display: block;
 }
 
+/* ponytail: sprite 3x3 de direcciones de mirada; sin JS (táctil / reduced-motion) queda la celda central */
+.hero__photo { position: relative; }
+.hero__photo .hero__face {
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  max-width: none;
+  left: calc(var(--fx, 1) * -100%);
+  top: calc(var(--fy, 1) * -100%);
+}
+
 .terminal {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);

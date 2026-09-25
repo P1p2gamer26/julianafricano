@@ -56,11 +56,12 @@ import { site } from '../data/site';
     <div class="hero__card">
       <div class="hero__photo">
         <img
-          src={`${site.base}/perfil.jpg`}
+          class="hero__face"
+          src={`${site.base}/personaje.webp`}
           alt="Retrato de Julian Felipe Africano Preciado"
           data-i18n-alt="hero.photoAlt"
-          width="800"
-          height="800"
+          width="1200"
+          height="1200"
           loading="eager"
           fetchpriority="high"
         />
@@ -84,6 +85,16 @@ import { site } from '../data/site';
       });
     };
     hero.addEventListener('pointermove', move);
+    // Personaje: sprite 3x3 (personaje.webp), elige la celda que mira hacia el cursor en toda la ventana.
+    const photo = hero.querySelector('.hero__photo') as HTMLElement | null;
+    if (photo) {
+      const cell = (d: number, size: number) => (Math.abs(d) < size * 0.6 ? 1 : d < 0 ? 0 : 2);
+      window.addEventListener('pointermove', (ev) => {
+        const r = photo.getBoundingClientRect();
+        photo.style.setProperty('--fx', String(cell(ev.clientX - (r.left + r.width / 2), r.width)));
+        photo.style.setProperty('--fy', String(cell(ev.clientY - (r.top + r.height / 2), r.height)));
+      }, { passive: true });
+    }
     hero.addEventListener('pointerleave', () => {
       hero.style.setProperty('--mx', '0');
       hero.style.setProperty('--my', '0');
